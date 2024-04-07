@@ -107,8 +107,23 @@ vim.opt.relativenumber = true -- false
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- mine
+-- fat cursor
+vim.opt.guicursor = ''
+
+-- line wrap, combine with relative number to jump faster
+vim.opt.wrap = false
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+
+-- Enable 24-bit RGB
+vim.opt.termguicolors = true
+
+-- disply a line at column 80
+vim.opt.colorcolumn = '80'
+
+-- mine
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -129,11 +144,11 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 50 -- 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 750 -- 300
+vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -186,19 +201,37 @@ vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- [[ TODO My basic Keymaps ]]
+-- [[ TODO: My basic Keymaps ]]
 
 -- Enter Normal mode from Insert mode
 vim.keymap.set('i', 'jj', '<esc>', { desc = 'Enter Normal mode from Insert mode' })
 
--- gj, gk instead of j, k
-vim.keymap.set({ 'n', 'v' }, 'j', 'gj', { desc = 'Move sub line' })
-vim.keymap.set({ 'n', 'v' }, 'k', 'gk', { desc = 'Move sub line' })
+-- gj, gk instead of j, k. Turn off since not set line wrap
+-- vim.keymap.set({ 'n', 'v' }, 'j', 'gj', { desc = 'Move sub line' })
+-- vim.keymap.set({ 'n', 'v' }, 'k', 'gk', { desc = 'Move sub line' })
+
+-- Visual mode JK to mode selected text
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- Join line below but keep cursor position the same
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line below and keep cursor position the same' })
+
+-- Center cursor after moving screen
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center cursor after moving screen' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Center cursor after moving screen' })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Center cursor after moving screen' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Center cursor after moving screen' })
+
+-- Basic movement and jumping
+vim.keymap.set({ 'n', 'o', 'v' }, '<c-l>', '$', { desc = 'Jump to end of line' })
+vim.keymap.set({ 'n', 'o', 'v' }, '<c-h>', '^', { desc = 'Jump to start of line' })
+vim.keymap.set({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' }) -- go to definition switch to <C-k>
 
 -- Insert new line above and stay in Normal mode
 vim.keymap.set('n', 'O', 'o<esc>', { desc = 'New line' })
@@ -209,21 +242,25 @@ vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 -- Select all with <C-a>
 vim.keymap.set({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
 
--- basic movement and jumping
-vim.keymap.set({ 'n', 'o', 'v' }, 'L', '$', { desc = 'Jump to end of line' })
-vim.keymap.set({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
-vim.keymap.set({ 'n', 'o', 'v' }, 'K', '%', { desc = 'Jump between braces' }) -- go to definition switch to <C-k>
+-- Replace regex string
+vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
+
+-- Source current file
+vim.keymap.set('n', '<leader><leader>', function()
+  vim.cmd 'so'
+end, { desc = 'Source File' })
 
 -- Toggle line number
 vim.keymap.set('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle Line [N]umber' })
 vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle Line Number [R]elative' })
 
--- <leader>fm to format with conform
+-- Paste over selected text without losing current clipboard
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without losing keep clipboard' })
+
 -- new buffer mapping
 -- <tab> next buffer
 -- <S-tab> prev buffer
 -- <leader>x buffer close
--- <leader>/ toggle comment (line, block)
 -- <C-n> nvimtree
 
 -- [[ Basic Autocommands ]]
@@ -383,7 +420,7 @@ require('lazy').setup({
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+        ['<leader>r'] = { name = '[R]eplace', _ = 'which_key_ignore' },
         ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         -- mine
@@ -494,7 +531,7 @@ require('lazy').setup({
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
-      -- TODO
+      -- TODO:
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -597,7 +634,7 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>rn', vim.lsp.buf.rename, '[R]eplace Var [N]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -713,12 +750,12 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>p',
+        '<leader>l',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[P]rettier',
+        desc = '[L]inter',
       },
     },
     opts = {
@@ -845,7 +882,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-          -- TODO telescope?
+          -- TODO: telescope?
         },
       }
     end,
@@ -981,7 +1018,7 @@ require('lazy').setup({
   },
 })
 
--- TODO find the plugin and remove keymaps instead
+-- TODO: find the plugin and remove keymaps instead
 vim.keymap.set('i', '<C-h>', '<bs>', { desc = 'Backspace' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
