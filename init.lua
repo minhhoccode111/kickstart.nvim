@@ -332,7 +332,7 @@ require('lazy').setup({
           end
         end, { desc = 'Prev[k] Hunk' })
 
-        -- setup keymaps, mine
+        -- setup keymaps
         map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[S]tage Hunk' })
         map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[R]eset Hunk' })
         map('v', '<leader>hs', function()
@@ -348,12 +348,12 @@ require('lazy').setup({
         map('n', '<leader>hb', function()
           gitsigns.blame_line { full = true }
         end, { desc = '[B]lame Line' })
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Gitsigns [B]lame Line' })
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle Gitsigns [B]lame Line' })
         map('n', '<leader>hd', gitsigns.diffthis, { desc = '[d]iff this' })
         map('n', '<leader>hD', function()
           gitsigns.diffthis '~'
         end, { desc = '[D]iff ~' })
-        map('n', '<leader>td', gitsigns.toggle_deleted, { desc = 'Gitsigns [D]eleted Line' })
+        map('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[T]oggle Gitsigns [D]eleted Line' })
       end,
     },
   },
@@ -384,7 +384,7 @@ require('lazy').setup({
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         -- mine
         ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
@@ -468,18 +468,22 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'ui-select')
 
       -- See `:help telescope.builtin`
+      -- mine
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<c-p>', builtin.resume, { desc = '[S]earch [R]esume' }) -- custom
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
+      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
+      vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind Current [W]ord' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind Grep String' })
+      vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
+      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind Old (Opened) Files' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Current [B]uffers' })
+      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
+      vim.keymap.set('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = '[F]ind [A]ll files' })
+      vim.keymap.set('n', '<leader>fc', '<cmd>Telescope git_commits<CR>', { desc = '[F]ind Git [C]ommits' })
+      vim.keymap.set('n', '<leader>ft', '<cmd>Telescope git_status<CR>', { desc = '[F]ind Git s[T]atus' })
+      vim.keymap.set('n', '<c-p>', builtin.resume, { desc = '[F]ind [R]esume' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -497,12 +501,12 @@ require('lazy').setup({
           grep_open_files = true,
           prompt_title = 'Live Grep in Open Files',
         }
-      end, { desc = '[S]earch [/] in Open Files' })
+      end, { desc = '[F]ind [/] in Open Files' })
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [N]eovim files' })
+      end, { desc = '[F]ind [N]eovim files' })
     end,
   },
 
@@ -707,12 +711,12 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>p',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = '[P]rettier',
       },
     },
     opts = {
