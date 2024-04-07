@@ -276,12 +276,14 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
-    opts = { -- mine
-      vim.keymap.set('n', '<C-/>', function()
-        require('Comment.api').toggle.linewise.current()
-      end, { desc = 'Comment Toggle' }),
+    opts = {
+      config = function() -- mine
+        vim.keymap.set('n', '<C-/>', function()
+          require('Comment.api').toggle.linewise.current()
+        end, { desc = 'Comment Toggle' })
 
-      vim.keymap.set('v', '<C-/>', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' }),
+        vim.keymap.set('v', '<C-/>', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' })
+      end,
     },
   },
 
