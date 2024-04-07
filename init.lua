@@ -214,9 +214,9 @@ vim.keymap.set({ 'n', 'o', 'v' }, 'L', '$', { desc = 'Jump to end of line' })
 vim.keymap.set({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
 vim.keymap.set({ 'n', 'o', 'v' }, 'K', '%', { desc = 'Jump between braces' }) -- go to definition switch to <C-k>
 
--- fast option line number
-vim.keymap.set('n', '<leader>ln', '<cmd>set nu!<CR>', { desc = 'Toggle [L]ine [N]umber' })
-vim.keymap.set('n', '<leader>lr', '<cmd>set rnu!<CR>', { desc = 'Toggle [L]ine [R]elative number' })
+-- Toggle line number
+vim.keymap.set('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle Line [N]umber' })
+vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle Line Number [R]elative' })
 
 -- <leader>fm to format with conform
 -- new buffer mapping
@@ -277,13 +277,15 @@ require('lazy').setup({
   {
     'numToStr/Comment.nvim',
     opts = {
-      config = function() -- mine
-        vim.keymap.set('n', '<C-/>', function()
-          require('Comment.api').toggle.linewise.current()
-        end, { desc = 'Comment Toggle' })
+      -- gc will wait for any movement next to toggle comment line
+      --[[ gb will wait for any movement next to toggle comment block ]]
 
-        vim.keymap.set('v', '<C-/>', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' })
-      end,
+      -- mine, after selected text with visual mode <C-/> to toggle line comment
+      vim.keymap.set('n', '<C-/>', function()
+        require('Comment.api').toggle.linewise.current()
+      end, { desc = 'Comment Toggle' }),
+
+      vim.keymap.set('v', '<C-/>', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' }),
     },
   },
 
@@ -302,6 +304,57 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      -- mine
+      on_attach = function(bufnr)
+        -- basic setup
+        local gitsigns = require 'gitsigns'
+        local function map(mode, l, r, opts)
+          opts = opts or { desc = 'No description set.' }
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- mine
+        -- Navigation
+        map('n', '<leader>hj', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '<leader>hj', bang = true }
+          else
+            gitsigns.nav_hunk 'next'
+          end
+        end, { desc = 'Gitsigns [H]unk Next[j]' })
+
+        map('n', '<leader>hk', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '<leader>hk', bang = true }
+          else
+            gitsigns.nav_hunk 'prev'
+          end
+        end, { desc = 'Gitsigns [H]unk Prev[k]' })
+
+        -- setup keymaps, mine
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Gitsigns [H]unk [S]tage' })
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'Gitsigns [H]unk [R]eset' })
+        map('v', '<leader>hs', function()
+          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'Gitsigns [H]unk [S]tage' })
+        map('v', '<leader>hr', function()
+          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'Gitsigns [H]unk [R]eset Line' })
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'Gitsigns [H]unk [S]tage' })
+        map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'Gitsigns [H]unk [U]ndo Stage' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'Gitsigns [H]unk [R]eset' })
+        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Gitsigns [H]unk [P]review' })
+        map('n', '<leader>hb', function()
+          gitsigns.blame_line { full = true }
+        end, { desc = 'Gitsigns [H]unk [B]lame Line' })
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Gitsigns [T]oggle Blame Line' })
+        map('n', '<leader>hd', gitsigns.diffthis, { desc = 'Gitsigns [H]unk [d]iff' })
+        map('n', '<leader>hD', function()
+          gitsigns.diffthis '~'
+        end, { desc = 'Gitsigns [H]unk [D]iff ~' })
+        map('n', '<leader>td', gitsigns.toggle_deleted, { desc = 'Gitsigns [T]oggle Line Deleted' })
+      end,
     },
   },
 
@@ -334,7 +387,8 @@ require('lazy').setup({
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         -- mine
-        ['<leader>l'] = { name = '[L]ine Number', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -772,11 +826,11 @@ require('lazy').setup({
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
+          -- ['<C-h>'] = cmp.mapping(function() -- mine
+          --   if luasnip.locally_jumpable(-1) then
+          --     luasnip.jump(-1)
+          --   end
+          -- end, { 'i', 's' }),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -785,6 +839,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          -- TODO telescope?
         },
       }
     end,
@@ -919,6 +974,9 @@ require('lazy').setup({
     },
   },
 })
+
+-- TODO find the plugin and remove keymaps instead
+vim.keymap.set('i', '<C-h>', '<bs>', { desc = 'Backspace' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
