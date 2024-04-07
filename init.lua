@@ -212,8 +212,19 @@ vim.keymap.set({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
 -- basic movement and jumping
 vim.keymap.set({ 'n', 'o', 'v' }, 'L', '$', { desc = 'Jump to end of line' })
 vim.keymap.set({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
-vim.keymap.set({ 'n', 'o', 'v' }, '<C-k>', '``', { desc = 'Jump to last cursor position' })
 vim.keymap.set({ 'n', 'o', 'v' }, 'K', '%', { desc = 'Jump between braces' }) -- go to definition switch to <C-k>
+
+-- fast option line number
+vim.keymap.set('n', '<leader>ln', '<cmd>set nu!<CR>', { desc = 'Toggle [L]ine [N]umber' })
+vim.keymap.set('n', '<leader>lr', '<cmd>set rnu!<CR>', { desc = 'Toggle [L]ine [R]elative number' })
+
+-- <leader>fm to format with conform
+-- new buffer mapping
+-- <tab> next buffer
+-- <S-tab> prev buffer
+-- <leader>x buffer close
+-- <leader>/ toggle comment (line, block)
+-- <C-n> nvimtree
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -259,11 +270,20 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
-  --  This is equivalent to:
-  --    require('Comment').setup({})
+  -- This is equivalent to:
+  --   require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    opts = { -- mine
+      vim.keymap.set('n', '<C-/>', function()
+        require('Comment.api').toggle.linewise.current()
+      end, { desc = 'Comment Toggle' }),
+
+      vim.keymap.set('v', '<C-/>', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' }),
+    },
+  },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -311,6 +331,8 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        -- mine
+        ['<leader>l'] = { name = '[L]ine Number', _ = 'which_key_ignore' },
       }
     end,
   },
