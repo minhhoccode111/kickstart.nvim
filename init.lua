@@ -109,7 +109,7 @@ vim.opt.mouse = 'a'
 
 -- mine
 -- fat cursor
-vim.opt.guicursor = ''
+-- vim.opt.guicursor = ''
 
 -- line wrap, combine with relative number to jump faster
 vim.opt.wrap = true
@@ -197,15 +197,6 @@ vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- [[ My basic Keymaps ]]
 --[[ KEYS ]]
 -- Enter Normal mode from Insert mode
@@ -242,6 +233,14 @@ vim.keymap.set({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
 -- Paste over selected text without losing current clipboard
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without losing keep clipboard' })
 
+-- Keybinds to make split navigation easier.
+--  Use ALT+<hjkl> to switch between windows
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
 --[[ COMMANDS ]]
 -- Save file with <C-s>
 vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
@@ -255,18 +254,21 @@ vim.keymap.set('n', '<leader><leader>', function()
 end, { desc = 'Source File' })
 
 -- Toggle line number
-vim.keymap.set('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle Line [N]umber' })
-vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle Line Number [R]elative' })
+vim.keymap.set('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle [N]umber Line' })
+vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number Line' })
 
 -- Close buffer
 vim.keymap.set('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Quit Current' })
 vim.keymap.set('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
 
+-- Open terminals
+vim.keymap.set('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]oggle [T]erminal' })
+
+-- TODO:
 -- new buffer mapping
 -- <tab> next buffer
 -- <S-tab> prev buffer
--- <leader>x buffer close
--- <C-n> nvimtree
+-- Toggle Terminals (vertical, horizontal, float etc.)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -432,6 +434,7 @@ require('lazy').setup({
         -- mine
         ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+        ['<leader>n'] = { name = '[N]eotree', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = '[X]Quit', _ = 'which_key_ignore' },
         ['<leader>ls'] = { name = '[L]SP [S]ymbols', _ = 'which_key_ignore' },
@@ -496,11 +499,15 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            -- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+
+            -- In case we prefer <tab> for completion
+            -- i = { ['<tab>'] = require('telescope.actions').select_default },
+            -- n = { ['<tab>'] = require('telescope.actions').select_default },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {

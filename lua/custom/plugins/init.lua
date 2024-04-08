@@ -3,8 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 
-print 'Hello, Neovim! From minhhoccode111'
-
 return {
-  --
+  require 'custom.plugins.autopairs',
+  require 'custom.plugins.neotree',
 }
