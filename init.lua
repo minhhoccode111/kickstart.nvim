@@ -547,6 +547,18 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[F]ind [N]eovim files' })
+
+      -- Shortcut for searching my /project dir
+      vim.keymap.set('n', '<leader>fp', function()
+        builtin.find_files {
+          -- symlink to ~/project
+          cwd = '$PROJECTDIR',
+          -- show hidden files
+          hidden = true, -- to search like .env etc
+          -- show file ignore by .gitignore (who search in /node_modules?)
+          -- no_ignore = true,
+        }
+      end, { desc = '[F]ind in /[p]roject dir' })
     end,
   },
 
