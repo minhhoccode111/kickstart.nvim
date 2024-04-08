@@ -112,7 +112,7 @@ vim.opt.mouse = 'a'
 vim.opt.guicursor = ''
 
 -- line wrap, combine with relative number to jump faster
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -515,9 +515,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind Current [W]ord' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind Grep String' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep String' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind Old (Opened) Files' })
+      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind [O]ld (Opened) Files' })
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Current [B]uffers' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
       vim.keymap.set('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = '[F]ind [A]ll files' })
@@ -654,8 +654,9 @@ require('lazy').setup({
           map('<leader>la', vim.lsp.buf.code_action, 'Code [A]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
+          -- Calling the function twice will jump to the docs window
           --  See `:help K` for why this keymap.
-          map('<leader>lk', vim.lsp.buf.hover, '[K]eyword Documentation') -- 'K'
+          map('<leader>lk', vim.lsp.buf.hover, '[K]eyword Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -700,7 +701,11 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        -- Example toggle this on will install clangD on the next installation
+        -- and automatically attach in C files, assume that we already
+        -- have prequisite things for running clangD on our system like
+        -- a C compiler etc. Same with other languages
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -710,7 +715,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
@@ -741,7 +746,14 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        -- Other
         'stylua', -- Used to format Lua code
+
+        -- Web dev
+        'prettier',
+
+        -- Low level
+        -- 'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -857,7 +869,7 @@ require('lazy').setup({
           -- Select the [p]revious item
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
-          -- Scroll the documentation window [b]ack / [f]orward
+          -- Scroll the DOCUMENTATION WINDOW [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
@@ -865,6 +877,10 @@ require('lazy').setup({
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
+          -- Accept with <c-m>, <c-j>, and <enter>
+          ['<enter>'] = cmp.mapping.confirm { select = true },
+          -- In cases you don't want to press Ctrl key
+          ['<tab>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -879,16 +895,21 @@ require('lazy').setup({
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
+
+          --[[ 
+          disable since conflict with <c-h> backspace in insert mode
+          and <c-h> move to the start of line in normal mode
           ['<C-l>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          -- ['<C-h>'] = cmp.mapping(function() -- mine
-          --   if luasnip.locally_jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   end
-          -- end, { 'i', 's' }),
+          ['<C-h>'] = cmp.mapping(function() -- mine
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { 'i', 's' }), 
+          ]]
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -896,8 +917,12 @@ require('lazy').setup({
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'path' },
-          -- TODO: telescope?
+          { name = 'path' }, -- files' path
+
+          -- nvim_cmp is like a framework and we need to make sure that
+          -- we add those to the sources for nvim_cmp to make sure that
+          -- nvim_cmp actually getting those items in your config
+          -- Example like an AI code completion etc.
         },
       }
     end,
@@ -923,9 +948,18 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  -- NOTE:
+  -- TODO:
+  -- FIXME:
+  -- FIX:
+  -- BUG:
+  -- WARN:
+  -- HACK:
+  -- PERF:
+  -- TEST:
 
   { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
+    'echasnovski/mini.nvim', -- TODO: explore this
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -965,7 +999,16 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'vim',
+        'vimdoc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1001,16 +1044,16 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -1032,9 +1075,6 @@ require('lazy').setup({
     },
   },
 })
-
--- TODO: find the plugin and remove keymaps instead
-vim.keymap.set('i', '<C-h>', '<bs>', { desc = 'Backspace' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
