@@ -206,8 +206,8 @@ vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- [[ TODO: My basic Keymaps ]]
-
+-- [[ My basic Keymaps ]]
+--[[ KEYS ]]
 -- Enter Normal mode from Insert mode
 vim.keymap.set('i', 'jj', '<esc>', { desc = 'Enter Normal mode from Insert mode' })
 
@@ -236,11 +236,15 @@ vim.keymap.set({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' }
 -- Insert new line above and stay in Normal mode
 vim.keymap.set('n', 'O', 'o<esc>', { desc = 'New line' })
 
--- Save file with <C-s>
-vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
-
 -- Select all with <C-a>
 vim.keymap.set({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
+
+-- Paste over selected text without losing current clipboard
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without losing keep clipboard' })
+
+--[[ COMMANDS ]]
+-- Save file with <C-s>
+vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 
 -- Replace regex string
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
@@ -254,8 +258,9 @@ end, { desc = 'Source File' })
 vim.keymap.set('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle Line [N]umber' })
 vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle Line Number [R]elative' })
 
--- Paste over selected text without losing current clipboard
-vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without losing keep clipboard' })
+-- Close buffer
+vim.keymap.set('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Quit Current' })
+vim.keymap.set('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
 
 -- new buffer mapping
 -- <tab> next buffer
@@ -428,6 +433,7 @@ require('lazy').setup({
         ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
+        ['<leader>x'] = { name = '[X]Quit', _ = 'which_key_ignore' },
         ['<leader>ls'] = { name = '[L]SP [S]ymbols', _ = 'which_key_ignore' },
       }
     end,
@@ -716,7 +722,7 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
-        --
+        markdownlint = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -1055,6 +1061,8 @@ require('lazy').setup({
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
 }, {
+  -- Configuration, checkout the docs below
+  -- https://github.com/folke/lazy.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -1073,6 +1081,34 @@ require('lazy').setup({
       task = '📌',
       lazy = '💤 ',
     },
+  },
+
+  -- Some basics performance lazy docs
+  performance = {
+    cache = { enabled = true },
+    reset_packpath = true,
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+
+  -- Enable profiling of lazy.nvim. This will add some overhead,
+  -- so only enable this when you are debugging lazy.nvim
+  profiling = {
+    -- Enables extra stats on the debug tab related to the loader cache.
+    -- Additionally gathers stats about all package.loaders
+    loader = false,
+    -- Track each new require in the Lazy profiling tab
+    require = false,
   },
 })
 
