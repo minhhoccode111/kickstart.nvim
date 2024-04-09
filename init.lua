@@ -193,6 +193,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line below and keep cursor position the same' })
 
 -- Center cursor after moving screen
+vim.keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'Center cursor after moving screen' })
+vim.keymap.set('n', '<C-b>', '<C-b>zz', { desc = 'Center cursor after moving screen' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center cursor after moving screen' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Center cursor after moving screen' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Center cursor after moving screen' })
@@ -565,17 +567,25 @@ require('lazy').setup({
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[F]ind [N]eovim files' })
 
-      -- Shortcut for searching my /project dir
-      vim.keymap.set('n', '<leader>fp', function()
+      -- Custom search when you get prompted to options to search
+      vim.keymap.set('n', '<leader>f?', function()
+        local cwd_s = vim.fn.input 'Path (~/): '
+        local hidden_c = vim.fn.input 'With hidden files? (y/n) '
+        local no_ignore_c = vim.fn.input 'Allow files listed in .gitignore? (y/n) '
+        -- if cwd not provide search in current dir
+        local cwd = cwd_s ~= '' and '~/' .. cwd_s or nil
+        local hidden = hidden_c == 'y' or hidden_c == 'Y' and true or false
+        local no_ignore = no_ignore_c == 'y' or no_ignore_c == 'Y' and true or false
+
         builtin.find_files {
-          -- symlink to ~/project
-          cwd = '$PROJECTDIR',
+          -- this path is based on your system's files structure
+          cwd = cwd,
           -- show hidden files
-          hidden = true, -- to search like .env etc
+          hidden = hidden, -- to search like .env etc
           -- show file ignore by .gitignore (who search in /node_modules?)
-          -- no_ignore = true,
+          no_ignore = no_ignore,
         }
-      end, { desc = '[F]ind in /[p]roject dir' })
+      end, { desc = 'Prompt to [F]ind from ~/[?]' })
     end,
   },
 
@@ -757,7 +767,7 @@ require('lazy').setup({
       --    :Mason
       --
       --  You can press `g?` for help in this menu.
-      require('mason').setup() -- TODO: work on this
+      require('mason').setup()
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
