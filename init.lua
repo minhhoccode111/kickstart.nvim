@@ -205,9 +205,6 @@ vim.keymap.set({ 'n', 'o', 'v' }, '<c-l>', '$', { desc = 'Jump to end of line' }
 vim.keymap.set({ 'n', 'o', 'v' }, '<c-h>', '^', { desc = 'Jump to start of line' })
 vim.keymap.set({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' })
 
--- Jump between in current buffer
-vim.keymap.set({ 'n', 'i' }, '<c-o>', '<c-6>', { desc = 'Previous file in buffer' })
-
 -- Insert new line above and stay in Normal mode
 vim.keymap.set('n', 'O', 'o<esc>', { desc = 'New line above' })
 
@@ -244,6 +241,10 @@ vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- Save file with <C-s>
 vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 
+-- Cycle through files in current buffer
+vim.keymap.set({ 'n', 'i' }, '<c-o>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
+vim.keymap.set({ 'n', 'i' }, '<c-i>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
+
 -- Replace regex string
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
 
@@ -256,7 +257,7 @@ end, { desc = 'Source File' })
 vim.keymap.set('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle [N]umber Line' })
 vim.keymap.set('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number Line' })
 
--- Close buffer
+-- Close window
 vim.keymap.set('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Quit Current' })
 vim.keymap.set('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
 
@@ -271,8 +272,6 @@ vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]i
 
 -- TODO:
 -- new buffer mapping
--- <tab> next buffer
--- <S-tab> prev buffer
 -- Toggle Terminals (vertical, horizontal, float etc.)
 
 -- [[ Basic Autocommands ]]

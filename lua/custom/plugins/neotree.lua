@@ -120,7 +120,7 @@ return {
           ['<esc>'] = 'cancel', -- close preview or floating neo-tree window
           ['P'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = true } },
           -- Read `# Preview Mode` for more information
-          ['l'] = 'focus_preview',
+          ['fp'] = 'focus_preview', -- default l key
           ['S'] = 'open_split',
           ['s'] = 'open_vsplit',
           -- ["S"] = "split_with_window_picker",
@@ -184,6 +184,7 @@ return {
           never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
             --".DS_Store",
             --"thumbs.db"
+            '.git', -- no need to lurk in .git
           },
           never_show_by_pattern = { -- uses glob style patterns
             --".null-ls_*",
@@ -204,12 +205,12 @@ return {
         -- instead of relying on nvim autocmd events.
         window = {
           mappings = {
-            [','] = 'navigate_up', -- default <bs>
-            ['.'] = 'set_root',
-            -- ['H'] = 'toggle_hidden', -- default on, but turn on hidden by default
-            -- ['/'] = 'fuzzy_finder', -- default on
-            -- ['D'] = 'fuzzy_finder_directory',  -- default on
-            -- ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm -- default on
+            ['h'] = 'navigate_up', -- default <bs>
+            ['l'] = 'set_root', -- default .
+            ['H'] = { enabled = false }, -- default toggle_hidden
+            ['/'] = { enabled = false }, -- default fuzzy_finder
+            ['D'] = 'fuzzy_finder_directory',
+            ['#'] = 'fuzzy_sorter',
             -- ["D"] = "fuzzy_sorter_directory",
             ['f'] = 'filter_on_submit',
             ['<c-x>'] = 'clear_filter',
@@ -247,8 +248,8 @@ return {
         window = {
           mappings = {
             ['bd'] = 'buffer_delete',
-            [','] = 'navigate_up', -- default <bs>
-            ['.'] = 'set_root',
+            ['h'] = 'navigate_up', -- default <bs>
+            ['l'] = 'set_root', -- default .
             ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
             ['oc'] = { 'order_by_created', nowait = false },
             ['od'] = { 'order_by_diagnostics', nowait = false },
