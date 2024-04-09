@@ -242,8 +242,9 @@ vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 
 -- Cycle through files in current buffer
-vim.keymap.set({ 'n', 'i' }, '<c-o>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
-vim.keymap.set({ 'n', 'i' }, '<c-i>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
+vim.keymap.set('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
+vim.keymap.set('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
+vim.keymap.set('n', '<leader>xf', '<cmd> bd! <cr>', { desc = '[X]Quit [F]ile in current buffer' })
 
 -- Replace regex string
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
