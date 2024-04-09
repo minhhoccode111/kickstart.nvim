@@ -244,9 +244,10 @@ vim.keymap.set({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 -- Cycle through files in current buffer
 vim.keymap.set('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
 vim.keymap.set('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
-vim.keymap.set('n', '<leader>xf', '<cmd> bd! <cr>', { desc = '[X]Quit [F]ile in current buffer' })
+-- split, prev buffer, window up, delete buffer (performance?)
+vim.keymap.set('n', '<leader>xb', '<cmd> sp <cr> <cmd> bp <cr> <c-w>k <cmd> bd! <cr>', { desc = '[X]Quit [B]uffer Current' })
 
--- Replace regex string
+-- Replace regex string current file
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
 
 -- Source current file
