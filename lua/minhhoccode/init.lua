@@ -23,5 +23,6 @@ return {
   require 'minhhoccode.plugins.comment',
   require 'minhhoccode.plugins.other',
   require 'minhhoccode.plugins.tokyonight',
+  require 'minhhoccode.plugins.bufferline',
   require 'minhhoccode.plugins.whichkey',
 }

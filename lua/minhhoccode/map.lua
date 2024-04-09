@@ -70,8 +70,10 @@ map({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 -- Cycle through files in current buffer
 map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
 map('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
+map('n', '<tab>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
+map('n', '<s-tab>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
 -- split, prev buffer, window up, delete buffer (performance?)
-map('n', '<leader>xb', '<cmd> sp <cr> <cmd> bp <cr> <c-w>k <cmd> bd! <cr>', { desc = '[X]Quit [B]uffer Current' })
+map('n', '<leader>xb', '<cmd> sp <cr> <cmd> bp <cr> <c-w>k <cmd> bd! <cr>', { desc = '[X]Quit [B]uffer Current' }) -- TODO: work with the plugin command instead
 
 -- Replace regex string current file
 map('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })

@@ -205,5 +205,7 @@ return { -- LSP Configuration & Plugins
         end,
       },
     }
+
+    -- TODO: work with DAP, Linter, Formatters
   end,
 }
