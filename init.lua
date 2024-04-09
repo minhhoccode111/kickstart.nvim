@@ -176,27 +176,6 @@ vim.opt.scrolloff = 8 -- 10
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
--- <esc><esc>
-vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 -- [[ My basic Keymaps ]]
 --[[ KEYS ]]
 -- Enter Normal mode from Insert mode
@@ -222,10 +201,13 @@ vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Center cursor after moving screen' }
 -- Basic movement and jumping
 vim.keymap.set({ 'n', 'o', 'v' }, '<c-l>', '$', { desc = 'Jump to end of line' })
 vim.keymap.set({ 'n', 'o', 'v' }, '<c-h>', '^', { desc = 'Jump to start of line' })
-vim.keymap.set({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' }) -- go to definition switch to <C-k>
+vim.keymap.set({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' })
+
+-- Jump between in current buffer
+vim.keymap.set({ 'n', 'i' }, '<c-o>', '<c-6>', { desc = 'Previous file in buffer' })
 
 -- Insert new line above and stay in Normal mode
-vim.keymap.set('n', 'O', 'o<esc>', { desc = 'New line' })
+vim.keymap.set('n', 'O', 'o<esc>', { desc = 'New line above' })
 
 -- Select all with <C-a>
 vim.keymap.set({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
@@ -240,6 +222,21 @@ vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- is not what someone will guess without a bit more experience.
+--
+-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- or just use <C-\><C-n> to exit terminal mode
+-- <esc><esc>
+vim.keymap.set('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- TIP: Disable arrow keys in normal mode
+-- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 --[[ COMMANDS ]]
 -- Save file with <C-s>
@@ -263,6 +260,12 @@ vim.keymap.set('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
 
 -- Open terminals
 vim.keymap.set('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]oggle [T]erminal' })
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'Go to [D]iagnostic [P]revious message' })
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Go to [D]iagnostic [N]ext message' })
+vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
 
 -- TODO:
 -- new buffer mapping
@@ -432,11 +435,12 @@ require('lazy').setup({
         -- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 
         -- mine
+        ['<leader>d'] = { name = '[D]ebug | [D]iagnostic', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
         ['<leader>n'] = { name = '[N]eotree', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = '[X]Quit', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
         ['<leader>ls'] = { name = '[L]SP [S]ymbols', _ = 'which_key_ignore' },
       }
     end,
