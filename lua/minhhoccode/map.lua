@@ -33,6 +33,9 @@ map({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' })
 -- Insert new line above and stay in Normal mode
 map('n', 'O', 'o<esc>', { desc = 'New line above' })
 
+-- Insert new line and move cursor down in Insert mode
+map('i', '<c-j>', '<esc>o', { desc = 'New line in Insert mode' })
+
 -- Select all with <C-a>
 map({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
 
@@ -83,9 +86,13 @@ map('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number
 map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Quit Current' })
 map('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
 
+-- Change window Width
+map('n', '<c-,>', '<c-w><', { desc = 'Decrease Window Width' })
+map('n', '<c-.>', '<c-w>>', { desc = 'Increase Window Width' })
+
 -- Split window
-map('n', '<leader>wh', '<cmd> sp <cr>', { desc = 'New [W]indow [H]orizon' })
-map('n', '<leader>wv', '<cmd> vsp <cr>', { desc = 'New [W]indow [V]ertical' })
+map('n', '<leader>-', '<cmd> sp <cr>', { desc = 'New [-]Horizon Window' })
+map('n', '<leader>|', '<cmd> vsp <cr>', { desc = 'New [|]Vertical Window' })
 
 -- Cycle through files in current buffer
 map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next Buffer', silent = true })
