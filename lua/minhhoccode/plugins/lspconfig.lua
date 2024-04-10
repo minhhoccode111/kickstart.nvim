@@ -160,6 +160,9 @@ return { -- LSP Configuration & Plugins
       emmet_ls = {},
       markdownlint = {},
       ast_grep = {},
+      tailwindcss = {},
+      cssls = {},
+      grammarly = {},
 
       lua_ls = {
         -- cmd = {...},
