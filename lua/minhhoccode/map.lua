@@ -18,17 +18,17 @@ map('v', 'K', ":m '<-2<CR>gv=gv")
 map('n', 'J', 'mzJ`z', { desc = 'Join line below and keep cursor position the same' })
 
 -- Center cursor after moving screen
-map('n', '<C-f>', '<C-f>zz', { desc = 'Center cursor after moving screen' })
-map('n', '<C-b>', '<C-b>zz', { desc = 'Center cursor after moving screen' })
-map('n', '<C-d>', '<C-d>zz', { desc = 'Center cursor after moving screen' })
-map('n', '<C-u>', '<C-u>zz', { desc = 'Center cursor after moving screen' })
+map('n', '<c-f>', '<c-f>zz', { desc = 'Center cursor after moving screen' })
+map('n', '<c-b>', '<c-b>zz', { desc = 'Center cursor after moving screen' })
+map('n', '<c-d>', '<c-d>zz', { desc = 'Center cursor after moving screen' })
+map('n', '<c-u>', '<c-u>zz', { desc = 'Center cursor after moving screen' })
 map('n', 'n', 'nzzzv', { desc = 'Center cursor after moving screen' })
 map('n', 'N', 'Nzzzv', { desc = 'Center cursor after moving screen' })
 
 -- Basic movement and jumping
-map({ 'n', 'o', 'v' }, '<c-l>', '$', { desc = 'Jump to end of line' })
-map({ 'n', 'o', 'v' }, '<c-h>', '^', { desc = 'Jump to start of line' })
-map({ 'n', 'o', 'v' }, '<c-k>', '%', { desc = 'Jump between braces' })
+map({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
+map({ 'n', 'o', 'v' }, 'L', '$', { desc = 'Jump to end of line' })
+map({ 'n', 'o' }, 'K', '%', { desc = 'Jump between braces' })
 
 -- Insert new line above and stay in Normal mode
 map('n', 'O', 'o<esc>', { desc = 'New line above' })
@@ -45,10 +45,10 @@ map('x', '<leader>p', '"_dP', { desc = 'Paste without losing keep clipboard' })
 -- Keybinds to make split navigation easier.
 --  Use ALT+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
-map('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-map('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-map('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-map('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+map('n', '<c-h>', '<c-w><c-h>', { desc = 'Move focus to the left window' })
+map('n', '<c-l>', '<c-w><c-l>', { desc = 'Move focus to the right window' })
+map('n', '<c-j>', '<c-w><c-j>', { desc = 'Move focus to the lower window' })
+map('n', '<c-k>', '<c-w><c-k>', { desc = 'Move focus to the upper window' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

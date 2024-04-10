@@ -154,15 +154,51 @@ return { -- LSP Configuration & Plugins
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      tsserver = {},
+      tsserver = {
+        root_dir = function(...)
+          return require('lspconfig.util').root_pattern '.git'(...)
+        end,
+        single_file_support = false,
+
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'literal',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+        },
+      },
       eslint = {},
       emmet_language_server = {},
       emmet_ls = {},
-      markdownlint = {},
+      -- markdownlint = {},
       ast_grep = {},
-      tailwindcss = {},
-      cssls = {},
+      tailwindcss = {
+        root_dir = function(...)
+          return require('lspconfig.util').root_pattern '.git'(...)
+        end,
+      },
       grammarly = {},
+      html = {},
+      cssls = {},
 
       lua_ls = {
         -- cmd = {...},
@@ -218,7 +254,5 @@ return { -- LSP Configuration & Plugins
         end,
       },
     }
-
-    -- TODO: work with DAP, Linter, Formatters
   end,
 }

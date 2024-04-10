@@ -5,8 +5,8 @@ return {
   build = ':TSUpdate',
   opts = {
     ensure_installed = {
-      'bash',
-      'c',
+      -- 'bash',
+      -- 'c',
 
       'lua',
       'luadoc',
@@ -14,17 +14,19 @@ return {
       'vim',
       'vimdoc',
 
-      'markdown',
-      'html',
+      -- 'markdown',
+      -- 'html',
       'javascript',
       'typescript',
       'jsdoc',
+      'css',
+      'json',
     },
 
-    -- autotag for react
+    --[[ -- autotag for react
     autotag = {
       enable = true,
-    },
+    }, ]]
 
     -- Autoinstall languages that are not installed
     auto_install = true,
