@@ -81,7 +81,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
+    vim.keymap.set('n', '<leader>ff', builtin.fd, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind Current [W]ord' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep String' })
@@ -89,9 +89,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind [O]ld (Opened) Files' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Current [B]uffers' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
-    vim.keymap.set('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = '[F]ind [A]ll files' })
-    vim.keymap.set('n', '<leader>fc', '<cmd>Telescope git_commits<CR>', { desc = '[F]ind Git [C]ommits' })
-    vim.keymap.set('n', '<leader>ft', '<cmd>Telescope git_status<CR>', { desc = '[F]ind Git s[T]atus' })
+    vim.keymap.set('n', '<leader>fa', function() -- use fd for performance search
+      builtin.fd {
+        no_ignore = true,
+        hidden = true,
+        follow = true,
+      }
+    end, { desc = '[F]ind [A]ll files' })
+    vim.keymap.set('n', '<leader>fc', builtin.git_commits, { desc = '[F]ind Git [C]ommits' })
+    vim.keymap.set('n', '<leader>ft', builtin.git_status, { desc = '[F]ind Git s[T]atus' })
     vim.keymap.set('n', '<c-p>', builtin.resume, { desc = '[F]ind [R]esume' })
 
     -- Slightly advanced example of overriding default behavior and theme
@@ -114,20 +120,39 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- Shortcut for searching your Neovim configuration files
     vim.keymap.set('n', '<leader>fn', function()
-      builtin.find_files { cwd = vim.fn.stdpath 'config' }
+      builtin.fd { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[F]ind [N]eovim files' })
 
     -- Custom search when you get prompted to options to search
     vim.keymap.set('n', '<leader>f?', function()
       local cwd_s = vim.fn.input 'Path (~/): '
-      local hidden_c = vim.fn.input 'With hidden files? (y/n) '
-      local no_ignore_c = vim.fn.input 'Allow files listed in .gitignore? (y/n) '
-      -- if cwd not provide search in current dir
-      local cwd = cwd_s ~= '' and '~/' .. cwd_s or nil
-      local hidden = hidden_c == 'y' or hidden_c == 'Y' and true or false
-      local no_ignore = no_ignore_c == 'y' or no_ignore_c == 'Y' and true or false
+      local hidden_c = vim.fn.input 'With hidden files? (Y/n) '
+      local no_ignore_c = vim.fn.input 'Show files listed in .gitignore (node_modules)? (y/N) '
 
-      builtin.find_files {
+      -- if cwd not provide search in current dir
+      local cwd = cwd_s ~= '' and '~/' .. cwd_s or nil -- work like a?b:c in js
+
+      -- {hidden}           (boolean)         determines whether to show hidden
+      --                                      files or not (default: false)
+      local hidden
+      if hidden_c == 'n' or hidden_c == 'N' then
+        hidden = false
+      else
+        -- default include hidden files
+        hidden = true
+      end
+
+      -- {no_ignore}        (boolean)         show files ignored by .gitignore,
+      --                                      .ignore, etc. (default: false)
+      local no_ignore
+      if no_ignore_c == 'y' or no_ignore_c == 'Y' then
+        no_ignore = true
+      else
+        -- default not include files in .gitignore
+        no_ignore = false
+      end
+
+      builtin.fd {
         -- this path is based on your system's files structure
         cwd = cwd,
         -- show hidden files
