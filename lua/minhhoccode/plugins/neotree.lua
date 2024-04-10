@@ -14,18 +14,32 @@ return {
     require('neo-tree').setup {
       filesystem = {
         filtered_items = {
-          hide_dotfiles = false,
-          hide_gitignored = false,
+          -- hide_dotfiles = false,
+          -- hide_gitignored = false,
           never_show = {
             '.git',
+          },
+          always_show = { -- remains visible even if other settings would normally hide it
+            '.gitignore',
           },
         },
         window = {
           mappings = {
             ['l'] = 'set_root',
             ['h'] = 'navigate_up',
-            ['H'] = 'none',
-            ['/'] = 'none',
+            ['<a-h>'] = 'toggle_hidden',
+
+            ['L'] = 'focus_preview',
+            ['o'] = 'open',
+
+            ['/'] = 'none', -- to quick search with /
+            ['oc'] = 'none',
+            ['od'] = 'none',
+            ['og'] = 'none',
+            ['om'] = 'none',
+            ['on'] = 'none',
+            ['os'] = 'none',
+            ['ot'] = 'none',
           },
         },
       },
