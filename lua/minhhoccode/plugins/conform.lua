@@ -23,7 +23,7 @@ return { -- Autoformat
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
-    formatters_by_ft = {
+    formatters_by_ft = { -- <leader>b to add like ';' to js, ts
       lua = { 'stylua' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
@@ -31,6 +31,18 @@ return { -- Autoformat
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
       -- javascript = { { "prettierd", "prettier" } },
+
+      -- web
+      javascript = { { 'prettier', 'standardjs', 'ast_grep' } },
+      typescript = { { 'prettier', 'ts-standard', 'ast_grep' } },
+      jsx = { { 'prettier', 'ast_grep' } },
+      html = { { 'prettier', 'ast_grep' } },
+      css = { { 'prettier', 'ast_grep' } },
+      markdown = { { 'prettier', 'ast_grep' } },
+      json = { { 'prettier', 'ast_grep' } },
+
+      -- low level
+      c = { { 'ast_grep' } },
     },
   },
 }

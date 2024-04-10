@@ -13,6 +13,9 @@ return { -- LSP Configuration & Plugins
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
+
+    -- for js, ts
+    { 'MunifTanjim/prettier.nvim', opts = {} },
   },
   config = function()
     -- Brief aside: **What is LSP?**
@@ -152,7 +155,11 @@ return { -- LSP Configuration & Plugins
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       tsserver = {},
+      eslint = {},
+      emmet_language_server = {},
+      emmet_ls = {},
       markdownlint = {},
+      ast_grep = {},
 
       lua_ls = {
         -- cmd = {...},
@@ -187,9 +194,12 @@ return { -- LSP Configuration & Plugins
 
       -- Web dev
       'prettier',
+      'markdownlint',
+      'ts-standard',
+      'standardjs',
 
       -- Low level
-      -- 'prettier',
+      'ast_grep',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

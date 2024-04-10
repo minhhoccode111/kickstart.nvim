@@ -23,6 +23,9 @@ vim.opt.relativenumber = true -- false
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- things like hover
+vim.opt.mousemoveevent = true
+
 -- mine
 -- fat cursor
 -- vim.opt.guicursor = ''
@@ -48,6 +51,8 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
 
 -- Save undo history
 vim.opt.undofile = true

@@ -7,16 +7,29 @@ return {
     ensure_installed = {
       'bash',
       'c',
-      'html',
+
       'lua',
       'luadoc',
-      'markdown',
+
       'vim',
       'vimdoc',
+
+      'markdown',
+      'html',
+      'javascript',
+      'typescript',
+      'jsdoc',
     },
+
+    -- autotag for react
+    autotag = {
+      enable = true,
+    },
+
     -- Autoinstall languages that are not installed
     auto_install = true,
     highlight = {
+      -- `false` will disable whole extension
       enable = true,
       -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
       --  If you are experiencing weird indenting issues, add the language to

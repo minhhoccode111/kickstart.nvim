@@ -3,8 +3,8 @@
 return {
   'akinsho/bufferline.nvim',
 
-  dependencies = 'nvim-tree/nvim-web-devicons',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
 
-  -- default, since we already have the keymaps
+  -- only need tabs like display, already cycle through buffers with :bn :bp
   opts = {},
 }

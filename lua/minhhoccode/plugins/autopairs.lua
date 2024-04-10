@@ -12,7 +12,7 @@ return {
       disable_filetype = {
         'TelescopePrompt',
         'spectre_panel',
-        -- 'vim', -- since the " is comment
+        'vim', -- since the " is comment
       },
     }
 

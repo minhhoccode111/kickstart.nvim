@@ -67,14 +67,6 @@ map('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- Save file with <C-s>
 map({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 
--- Cycle through files in current buffer
-map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
-map('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
-map('n', '<tab>', '<cmd> bn <cr>', { desc = 'Next file in current buffer' })
-map('n', '<s-tab>', '<cmd> bp <cr>', { desc = 'Prev file in current buffer' })
--- split, prev buffer, window up, delete buffer (performance?)
-map('n', '<leader>xb', '<cmd> sp <cr> <cmd> bp <cr> <c-w>k <cmd> bd! <cr>', { desc = '[X]Quit [B]uffer Current' }) -- TODO: work with the plugin command instead
-
 -- Replace regex string current file
 map('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
 
@@ -90,6 +82,17 @@ map('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number
 -- Close window
 map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Quit Current' })
 map('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
+
+-- Split window
+map('n', '<leader>wh', '<cmd> sp <cr>', { desc = 'New [W]indow [H]orizon' })
+map('n', '<leader>wv', '<cmd> vsp <cr>', { desc = 'New [W]indow [V]ertical' })
+
+-- Cycle through files in current buffer
+map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next Buffer', silent = true })
+map('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev Buffer', silent = true })
+
+-- Close current buffer
+map('n', '<leader>xb', '<cmd> bd <cr>', { desc = '[X]Quit Buffer Force', silent = true })
 
 -- Open terminals
 map('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]oggle [T]erminal' })
