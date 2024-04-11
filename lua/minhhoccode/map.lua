@@ -83,8 +83,8 @@ map('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle [N]umber Line' })
 map('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number Line' })
 
 -- Close window
-map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Quit Current' })
-map('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Quit [A]ll' })
+map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Close w/ :q' })
+map('n', '<leader>xa', '<cmd> qa <cr>', { desc = '[X]Close w/ :q[a]' })
 
 -- Change window Width
 map('n', '<c-,>', '<c-w><', { desc = 'Decrease Window Width' })
@@ -94,12 +94,16 @@ map('n', '<c-.>', '<c-w>>', { desc = 'Increase Window Width' })
 map('n', '<leader>-', '<cmd> sp <cr>', { desc = 'New [-]Horizon Window' })
 map('n', '<leader>|', '<cmd> vsp <cr>', { desc = 'New [|]Vertical Window' })
 
+-- Extra Buffer keymaps in bufferline.lua
 -- Cycle through files in current buffer
 map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next Buffer', silent = true })
 map('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev Buffer', silent = true })
 
+-- Pick buffer to close
+map('n', '<leader>xp', '<cmd>lua require("bufferline").close_with_pick()<cr>', { desc = '[X]Close [P]ick Buffer' })
+
 -- Close current buffer
-map('n', '<leader>xb', '<cmd> bd <cr>', { desc = '[X]Quit Buffer Force', silent = true })
+map('n', '<leader>xb', '<cmd> bd <cr>', { desc = '[X]Close w/ :[b]d', silent = true })
 
 -- Open terminals
 map('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]oggle [T]erminal' })
