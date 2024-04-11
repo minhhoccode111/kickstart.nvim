@@ -21,6 +21,12 @@ return {
           },
           always_show = { -- remains visible even if other settings would normally hide it
             '.gitignore',
+            '.env',
+            '.env.test',
+            '.env.production',
+            '.env.development',
+            '.env.dev',
+            '.env.prod',
           },
         },
         window = {
@@ -32,7 +38,7 @@ return {
             ['L'] = 'focus_preview',
             ['o'] = 'open',
 
-            ['/'] = 'none', -- to quick search with /
+            ['/'] = 'none', -- to quick jumping with /
             ['oc'] = 'none',
             ['od'] = 'none',
             ['og'] = 'none',

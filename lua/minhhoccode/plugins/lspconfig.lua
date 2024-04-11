@@ -144,7 +144,7 @@ return { -- LSP Configuration & Plugins
       -- and automatically attach in C files, assume that we already
       -- have prequisite things for running clangD on our system like
       -- a C compiler etc. Same with other languages
-      clangd = {},
+      -- clangd = {},
       -- gopls = {},
       -- pyright = {},
       -- rust_analyzer = {},
@@ -186,11 +186,11 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
-      eslint = {},
+      -- eslint = {},
       emmet_language_server = {},
-      emmet_ls = {},
+      -- emmet_ls = {},
       -- markdownlint = {},
-      ast_grep = {},
+      -- ast_grep = {},
       tailwindcss = {
         root_dir = function(...)
           return require('lspconfig.util').root_pattern '.git'(...)
@@ -233,12 +233,12 @@ return { -- LSP Configuration & Plugins
 
       -- Web dev
       'prettier',
-      'markdownlint',
+      -- 'markdownlint',
       'ts-standard',
       'standardjs',
 
       -- Low level
-      'ast_grep',
+      -- 'ast_grep',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

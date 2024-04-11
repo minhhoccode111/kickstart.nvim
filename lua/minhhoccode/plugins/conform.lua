@@ -33,16 +33,16 @@ return { -- Autoformat
       -- javascript = { { "prettierd", "prettier" } },
 
       -- web
-      javascript = { { 'prettier', 'standardjs', 'ast_grep' } },
-      typescript = { { 'prettier', 'ts-standard', 'ast_grep' } },
-      jsx = { { 'prettier', 'ast_grep' } },
-      html = { { 'prettier', 'ast_grep' } },
-      css = { { 'prettier', 'ast_grep' } },
-      markdown = { { 'prettier', 'ast_grep' } },
-      json = { { 'prettier', 'ast_grep' } },
+      javascript = { { 'prettierd', 'prettier', 'standardjs' } },
+      typescript = { { 'prettier', 'ts-standard' } },
+      jsx = { { 'prettierd', 'prettier' } },
+      html = { { 'prettierd', 'prettier' } },
+      css = { { 'prettierd', 'prettier' } },
+      markdown = { { 'prettierd', 'prettier' } },
+      json = { { 'prettierd', 'prettier' } },
 
       -- low level
-      c = { { 'ast_grep' } },
+      -- c = { {  } },
     },
   },
 }
