@@ -28,6 +28,7 @@ map('n', 'N', 'Nzzzv', { desc = 'Center cursor after moving screen' })
 -- Basic movement and jumping
 map({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
 map({ 'n', 'o', 'v' }, 'L', '$', { desc = 'Jump to end of line' })
+-- no Visual since it is used to move line up and down
 map({ 'n', 'o' }, 'K', '%', { desc = 'Jump between braces' })
 
 -- Insert new line above and stay in Normal mode
@@ -79,8 +80,8 @@ map('n', '<leader><leader>', function()
 end, { desc = 'Source File' })
 
 -- Toggle line number
-map('n', '<leader>tn', '<cmd>set nu!<CR>', { desc = '[T]oggle [N]umber Line' })
-map('n', '<leader>tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number Line' })
+map('n', '<leader>Tn', '<cmd>set nu!<CR>', { desc = '[T]oggle [N]umber Line' })
+map('n', '<leader>Tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number Line' })
 
 -- Close window
 map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Close w/ :q' })
@@ -94,7 +95,8 @@ map('n', '<c-.>', '<c-w>>', { desc = 'Increase Window Width' })
 map('n', '<leader>-', '<cmd> sp <cr>', { desc = 'New [-]Horizon Window' })
 map('n', '<leader>|', '<cmd> vsp <cr>', { desc = 'New [|]Vertical Window' })
 
--- Extra Buffer keymaps in bufferline.lua
+-- Extra terminal keymaps in term.lua
+
 -- Cycle through files in current buffer
 map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next Buffer', silent = true })
 map('n', '<c-i>', '<cmd> bp <cr>', { desc = 'Prev Buffer', silent = true })
@@ -104,9 +106,6 @@ map('n', '<leader>xp', '<cmd>lua require("bufferline").close_with_pick()<cr>', {
 
 -- Close current buffer
 map('n', '<leader>xb', '<cmd> bd <cr>', { desc = '[X]Close w/ :[b]d', silent = true })
-
--- Open terminals
-map('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]oggle [T]erminal' })
 
 -- Diagnostic keymaps
 map('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'Go to [D]iagnostic [P]revious message' })

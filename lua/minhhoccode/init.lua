@@ -23,6 +23,7 @@ return {
   require 'minhhoccode.plugins.nvimcmp',
   require 'minhhoccode.plugins.other',
   require 'minhhoccode.plugins.telescope',
+  require 'minhhoccode.plugins.term',
   require 'minhhoccode.plugins.tokyonight',
   require 'minhhoccode.plugins.treesitter',
   require 'minhhoccode.plugins.whichkey',
