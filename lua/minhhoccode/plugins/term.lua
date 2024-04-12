@@ -4,22 +4,22 @@ return {
     config = function()
       require('nvterm').setup {
         -- Default setting
-        -- terminals = {
-        --   shell = vim.o.shell,
-        --   list = {},
-        --   type_opts = {
-        --     float = {
-        --       relative = 'editor',
-        --       row = 0.3,
-        --       col = 0.25,
-        --       width = 0.5,
-        --       height = 0.4,
-        --       border = 'single',
-        --     },
-        --     horizontal = { location = 'rightbelow', split_ratio = 0.3 },
-        --     vertical = { location = 'rightbelow', split_ratio = 0.5 },
-        --   },
-        -- },
+        terminals = {
+          --   shell = vim.o.shell,
+          --   list = {},
+          type_opts = {
+            float = {
+              --       relative = 'editor',
+              row = 0.2, -- row * 2 + height = 1 to be centered
+              col = 0.2, -- col * 2 + width = 1 to be centered
+              width = 0.6,
+              height = 0.6,
+              --       border = 'single',
+            },
+            horizontal = { location = 'rightbelow', split_ratio = 0.35 },
+            vertical = { location = 'rightbelow', split_ratio = 0.35 },
+          },
+        },
         behavior = {
           -- autoclose_on_quit = {
           --   enabled = false,
@@ -39,7 +39,7 @@ return {
       -- or just use <C-\><C-n> to exit terminal mode
       map('t', 'jj', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-      -- Open terminals
+      -- Open terminals -- In new buffer to will be displayed like tab on bufferline to quick navigate
       map('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]erminal New Buffer' })
 
       -- Togglable fast
@@ -47,10 +47,10 @@ return {
       map({ 'n', 't' }, '<a-j>', '<cmd>lua require("nvterm.terminal").toggle "horizontal"<cr>', { desc = 'Toggle [j]Bottm Terminal' })
       map({ 'n', 't' }, '<a-l>', '<cmd>lua require("nvterm.terminal").toggle "vertical"<cr>', { desc = 'Toggle [l]Right Terminal' })
 
-      -- New with <leader>
-      map({ 'n', 't' }, '<leader>ti', '<cmd>lua require("nvterm.terminal").new "float"<cr>', { desc = '[T]erminal New [i]Float' })
-      map({ 'n', 't' }, '<leader>tj', '<cmd>lua require("nvterm.terminal").new "horizontal"<cr>', { desc = '[T]erminal New [j]Bottom' })
-      map({ 'n', 't' }, '<leader>tl', '<cmd>lua require("nvterm.terminal").new "vertical"<cr>', { desc = '[T]erminal New [l]Right' })
+      -- New with <leader> -- No need since we just exit the terminal with <c-d> and toggle new terminal again
+      -- map({ 'n', 't' }, '<leader>ti', '<cmd>lua require("nvterm.terminal").new "float"<cr>', { desc = '[T]erminal New [i]Float' })
+      -- map({ 'n', 't' }, '<leader>tj', '<cmd>lua require("nvterm.terminal").new "horizontal"<cr>', { desc = '[T]erminal New [j]Bottom' })
+      -- map({ 'n', 't' }, '<leader>tl', '<cmd>lua require("nvterm.terminal").new "vertical"<cr>', { desc = '[T]erminal New [l]Right' })
 
       -- Open New Vertical terminal and run `test` script
       map({ 'n', 't' }, '<leader>ts', function()

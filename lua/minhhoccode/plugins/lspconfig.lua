@@ -144,61 +144,31 @@ return { -- LSP Configuration & Plugins
       -- and automatically attach in C files, assume that we already
       -- have prequisite things for running clangD on our system like
       -- a C compiler etc. Same with other languages
-      -- clangd = {},
-      -- gopls = {},
-      -- pyright = {},
-      -- rust_analyzer = {},
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+      -- ... etc. NOTE: See `:help lspconfig-all` for a list of all the pre-configured LSPs and how to install the lsp with `npm`
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      tsserver = {
-        root_dir = function(...)
-          return require('lspconfig.util').root_pattern '.git'(...)
-        end,
-        single_file_support = false,
-
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'literal',
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'all',
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        },
-      },
-      -- eslint = {},
+      -- Remember to install the lsp packages
+      --
+      -- because we setup with this approach, we don't also manually set up servers directly via lspconfig as this will cause servers to setup more than once
+      -- require('lspconfig')[server_name].setup(server)
+      clangd = {},
+      tsserver = {},
+      tailwindcss = {},
       emmet_language_server = {},
-      -- emmet_ls = {},
-      -- markdownlint = {},
-      -- ast_grep = {},
-      tailwindcss = {
-        root_dir = function(...)
-          return require('lspconfig.util').root_pattern '.git'(...)
-        end,
-      },
-      grammarly = {},
+      emmet_ls = {},
       html = {},
       cssls = {},
+      grammarly = {},
+      -- marksman = {},
+
+      -- eslint = {},
+      -- ast_grep = {},
+      -- gopls = {},
+      -- pyright = {},
+      -- rust_analyzer = {},
 
       lua_ls = {
         -- cmd = {...},
@@ -232,14 +202,17 @@ return { -- LSP Configuration & Plugins
       'stylua', -- Used to format Lua code
 
       -- Web dev
-      'prettier',
       -- 'markdownlint',
-      'ts-standard',
+      'prettier',
+      'prettierd',
       'standardjs',
+      'ts-standard',
 
       -- Low level
       -- 'ast_grep',
+      'clang-format',
     })
+
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
@@ -253,6 +226,38 @@ return { -- LSP Configuration & Plugins
           require('lspconfig')[server_name].setup(server)
         end,
       },
+
+      -- Example or setup in the lspconfig above
+      -- local handlers = {
+      --     -- The first entry (without a key) will be the default handler
+      --     -- and will be called for each installed server that doesn't have
+      --     -- a dedicated handler.
+      --     function (server_name) -- default handler (optional)
+      --         require("lspconfig")[server_name].setup {}
+      --     end,
+      --     -- Next, you can provide targeted overrides for specific servers.
+      --     ["rust_analyzer"] = function ()
+      --         require("rust-tools").setup {}
+      --     end,
+      --     ["lua_ls"] = function ()
+      --         local lspconfig = require("lspconfig")
+      --         lspconfig.lua_ls.setup {
+      --             settings = {
+      --                 Lua = {
+      --                     diagnostics = {
+      --                         globals = { "vim" }
+      --                     }
+      --                 }
+      --             }
+      --         }
+      --     end,
+      -- }
+      --
+      -- -- alt 1. Either pass handlers when setting up mason-lspconfig:
+      -- require("mason-lspconfig").setup({ handlers = handlers })
+      --
+      -- -- alt 2. or call the .setup_handlers() function.
+      -- require("mason-lspconfig").setup_handlers(handlers)
     }
   end,
 }

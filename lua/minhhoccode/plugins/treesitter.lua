@@ -1,21 +1,25 @@
 -- Highlight, edit, and navigate code
 
 return {
+  -- accidentally use `:TSInstall all` to install all parsers
+  -- and that's too much, don't know how to clean things up
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   opts = {
     ensure_installed = {
-      -- 'bash',
-      -- 'c',
+      -- Low level
+      'bash',
+      'c',
+      -- 'rust',
 
+      -- Default
       'lua',
       'luadoc',
-
       'vim',
       'vimdoc',
 
-      -- 'markdown',
-      -- 'html',
+      'markdown',
+      'html',
       'javascript',
       'typescript',
       'jsdoc',
@@ -33,6 +37,12 @@ return {
     highlight = {
       -- `false` will disable whole extension
       enable = true,
+      -- list of language that will be disabled
+      disable = {
+        -- 'c',
+        -- 'rust',
+        'markdown',
+      },
       -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
       --  If you are experiencing weird indenting issues, add the language to
       --  the list of additional_vim_regex_highlighting and disabled languages for indent.

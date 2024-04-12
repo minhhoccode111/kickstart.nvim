@@ -34,15 +34,15 @@ return { -- Autoformat
 
       -- web
       javascript = { { 'prettierd', 'prettier', 'standardjs' } },
-      typescript = { { 'prettier', 'ts-standard' } },
-      jsx = { { 'prettierd', 'prettier' } },
+      typescript = { { 'prettierd', 'prettier' } },
+      jsx = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
-      markdown = { { 'prettierd', 'prettier' } },
+      -- markdown = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
 
       -- low level
-      -- c = { {  } },
+      c = { { 'clang-format' } },
     },
   },
 }
