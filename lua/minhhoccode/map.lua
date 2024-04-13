@@ -35,7 +35,7 @@ map({ 'n', 'o' }, 'K', '%', { desc = 'Jump between braces' })
 map('n', 'O', 'o<esc>', { desc = 'New line above' })
 
 -- Insert new line and move cursor down in Insert mode
-map('i', '<c-j>', '<esc>o', { desc = 'New line in Insert mode' })
+-- map('i', '<c-j>', '<esc>o', { desc = 'New line in Insert mode' })
 
 -- Select all with <C-a>
 map({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
@@ -113,6 +113,7 @@ map('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Go to [D]iagnostic [N
 map('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic [E]rror messages' })
 map('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
 
--- Toggle Terminals (vertical, horizontal, float etc.) -- TODO:
+map('n', '<leader>mm', '<cmd>Mason<cr>', { desc = '[M]anager [M]ason' })
+map('n', '<leader>ml', '<cmd>Lazy<cr>', { desc = '[M]anager [L]azy' })
 
 return {}

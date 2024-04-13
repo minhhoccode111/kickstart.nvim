@@ -42,7 +42,7 @@ return { -- Autoformat
       json = { { 'prettierd', 'prettier' } },
 
       -- low level
-      c = { { 'clang-format' } },
+      -- c = { { 'clang-format' } },
     },
   },
 }

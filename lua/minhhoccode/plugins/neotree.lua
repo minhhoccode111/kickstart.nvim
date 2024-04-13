@@ -35,6 +35,9 @@ return {
             ['h'] = 'navigate_up',
             ['<a-h>'] = 'toggle_hidden',
 
+            ['z'] = 'none', -- since we want to center screen
+            ['Q'] = 'close_all_nodes',
+
             ['L'] = 'focus_preview',
             ['o'] = 'open',
 

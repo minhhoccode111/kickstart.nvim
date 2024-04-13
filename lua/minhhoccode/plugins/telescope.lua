@@ -82,7 +82,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
     vim.keymap.set('n', '<leader>ff', builtin.fd, { desc = '[F]ind [F]iles' })
-    vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind [S]elect Telescope' })
+    vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind Select [T]elescope' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind Current [W]ord' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep String' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
@@ -97,7 +97,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       }
     end, { desc = '[F]ind [A]ll files' })
     vim.keymap.set('n', '<leader>fc', builtin.git_commits, { desc = '[F]ind Git [C]ommits' })
-    vim.keymap.set('n', '<leader>ft', builtin.git_status, { desc = '[F]ind Git s[T]atus' })
+    vim.keymap.set('n', '<leader>fs', builtin.git_status, { desc = '[F]ind Git [S]tatus' })
     vim.keymap.set('n', '<c-p>', builtin.resume, { desc = '[F]ind [R]esume' })
 
     -- Slightly advanced example of overriding default behavior and theme

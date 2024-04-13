@@ -30,6 +30,7 @@ return { -- Useful plugin to show you pending keybinds.
       -- mine
       ['<leader>d'] = { name = '[D]ebug | [D]iagnostic', _ = 'which_key_ignore' },
       ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
+      ['<leader>m'] = { name = '[M]anagers', _ = 'which_key_ignore' },
       ['<leader>n'] = { name = '[N]eotree', _ = 'which_key_ignore' },
       ['<leader>t'] = { name = '[T]erminal', _ = 'which_key_ignore' },
       ['<leader>T'] = { name = '[T]oggle', _ = 'which_key_ignore' },
