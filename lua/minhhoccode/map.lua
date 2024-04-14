@@ -79,9 +79,10 @@ map('n', '<leader><leader>', function()
   vim.cmd 'so'
 end, { desc = 'Source File' })
 
--- Toggle line number
-map('n', '<leader>Tn', '<cmd>set nu!<CR>', { desc = '[T]oggle [N]umber Line' })
-map('n', '<leader>Tr', '<cmd>set rnu!<CR>', { desc = '[T]oggle [R]elative Number Line' })
+-- Toggle small things -- `!` stand for toggle action
+map('n', '<leader>Tn', '<cmd>set nu!<cr>', { desc = '[T]oggle [N]umber Line' })
+map('n', '<leader>Tr', '<cmd>set rnu!<cr>', { desc = '[T]oggle [R]elative Number Line' })
+map('n', '<leader>Tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap Line' })
 
 -- Close window
 map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Close w/ :q' })
