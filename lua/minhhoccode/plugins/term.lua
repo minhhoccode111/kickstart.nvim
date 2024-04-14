@@ -42,10 +42,10 @@ return {
       -- Open terminals -- In new buffer to will be displayed like tab on bufferline to quick navigate
       map('n', '<leader>tt', '<cmd> ter <cr>', { desc = '[T]erminal New Buffer' })
 
-      -- Togglable fast
+      -- Togglable fast, 'i' since it's closest
       map({ 'n', 't' }, '<a-i>', '<cmd>lua require("nvterm.terminal").toggle "float"<cr>', { desc = 'Toggle Float Terminal' })
-      map({ 'n', 't' }, '<a-j>', '<cmd>lua require("nvterm.terminal").toggle "horizontal"<cr>', { desc = 'Toggle [j]Bottm Terminal' })
-      map({ 'n', 't' }, '<a-l>', '<cmd>lua require("nvterm.terminal").toggle "vertical"<cr>', { desc = 'Toggle [l]Right Terminal' })
+      map({ 'n', 't' }, '<a-h>', '<cmd>lua require("nvterm.terminal").toggle "horizontal"<cr>', { desc = 'Toggle [H]orizontal Terminal' })
+      map({ 'n', 't' }, '<a-v>', '<cmd>lua require("nvterm.terminal").toggle "vertical"<cr>', { desc = 'Toggle [V]ertical Terminal' })
 
       -- New with <leader> -- No need since we just exit the terminal with <c-d> and toggle new terminal again
       -- map({ 'n', 't' }, '<leader>ti', '<cmd>lua require("nvterm.terminal").new "float"<cr>', { desc = '[T]erminal New [i]Float' })

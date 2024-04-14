@@ -12,7 +12,6 @@ require 'minhhoccode.map'
 -- plugins
 return {
   require 'minhhoccode.plugins.autopairs',
-  require 'minhhoccode.plugins.autotag',
   require 'minhhoccode.plugins.bufferline',
   require 'minhhoccode.plugins.comment',
   require 'minhhoccode.plugins.conform',
