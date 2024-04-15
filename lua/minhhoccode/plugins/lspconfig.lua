@@ -162,11 +162,11 @@ return { -- LSP Configuration & Plugins
       html = {},
       cssls = {},
       grammarly = {},
-      -- marksman = {},
+      marksman = {},
 
-      -- eslint = {},
-      -- ast_grep = {},
-      -- gopls = {},
+      eslint = {},
+      ast_grep = {},
+      gopls = {},
       -- pyright = {},
       -- rust_analyzer = {},
 

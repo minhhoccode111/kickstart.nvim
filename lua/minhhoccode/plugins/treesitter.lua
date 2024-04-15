@@ -25,6 +25,11 @@ return {
       'jsdoc',
       'css',
       'json',
+
+      -- other
+      -- 'xml',
+      -- 'http',
+      -- 'graphql',
     },
 
     --[[ -- autotag for react
@@ -41,7 +46,7 @@ return {
       disable = {
         -- 'c',
         -- 'rust',
-        'markdown',
+        -- 'markdown',
       },
       -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
       --  If you are experiencing weird indenting issues, add the language to

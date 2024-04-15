@@ -40,6 +40,7 @@ return { -- Autoformat
       css = { { 'prettierd', 'prettier' } },
       -- markdown = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
+      go = { 'ast_grep' },
 
       -- low level
       -- c = { { 'clang-format' } },
