@@ -21,13 +21,8 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     require('which-key').register {
-      -- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-      -- ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
       ['<leader>r'] = { name = '[R]eplace', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-      -- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-
-      -- mine
       ['<leader>d'] = { name = '[D]ebug | [D]iagnostic', _ = 'which_key_ignore' },
       ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
       ['<leader>m'] = { name = '[M]anagers', _ = 'which_key_ignore' },
@@ -35,7 +30,6 @@ return { -- Useful plugin to show you pending keybinds.
       ['<leader>t'] = { name = '[T]erminal', _ = 'which_key_ignore' },
       ['<leader>T'] = { name = '[T]oggle', _ = 'which_key_ignore' },
       ['<leader>x'] = { name = '[X]Close', _ = 'which_key_ignore' },
-      ['<leader>w'] = { name = 'New [W]indow', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
       ['<leader>ls'] = { name = '[L]SP [S]ymbols', _ = 'which_key_ignore' },
     }

@@ -45,7 +45,7 @@ map('n', 'O', 'o<esc>', { desc = 'New line above' })
 map({ 'i', 'n', 'v' }, '<C-a>', '<esc>ggVG', { desc = 'Select all' })
 
 -- Paste over selected text without losing current clipboard
-map('x', '<leader>p', '"_dP', { desc = 'Paste without losing keep clipboard' })
+map('x', '<leader>p', '"_dP', { desc = 'Paste without losing clipboard' })
 
 -- Keybinds to make split navigation easier.
 --  Use ALT+<hjkl> to switch between windows
@@ -87,6 +87,13 @@ end, { desc = 'Source File' })
 map('n', '<leader>Tn', '<cmd>set nu!<cr>', { desc = '[T]oggle [N]umber Line' })
 map('n', '<leader>Tr', '<cmd>set rnu!<cr>', { desc = '[T]oggle [R]elative Number Line' })
 map('n', '<leader>Tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap Line' })
+map('n', '<leader>TD', function()
+  if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable()
+  else
+    vim.diagnostic.disable()
+  end
+end, { desc = '[T]oggle [D]iagnostic Warning' })
 
 -- Close window
 map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Close w/ :q' })
@@ -101,6 +108,7 @@ map('n', '<leader>-', '<cmd> sp <cr>', { desc = 'New [-]Horizon Window' })
 map('n', '<leader>|', '<cmd> vsp <cr>', { desc = 'New [|]Vertical Window' })
 
 -- Extra terminal keymaps in term.lua
+-- Extra markdown keymaps in markdownpreview.lua
 
 -- Cycle through files in current buffer
 map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next Buffer', silent = true })
@@ -118,6 +126,7 @@ map('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Go to [D]iagnostic [N
 map('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic [E]rror messages' })
 map('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
 
+-- Managers
 map('n', '<leader>mm', '<cmd>Mason<cr>', { desc = '[M]anager [M]ason' })
 map('n', '<leader>ml', '<cmd>Lazy<cr>', { desc = '[M]anager [L]azy' })
 

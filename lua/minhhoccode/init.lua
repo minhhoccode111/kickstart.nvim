@@ -17,6 +17,7 @@ return {
   require 'minhhoccode.plugins.conform',
   require 'minhhoccode.plugins.gitsigns',
   require 'minhhoccode.plugins.lspconfig',
+  require 'minhhoccode.plugins.markdownpreview',
   require 'minhhoccode.plugins.mini',
   require 'minhhoccode.plugins.neotree',
   require 'minhhoccode.plugins.nvimcmp',
