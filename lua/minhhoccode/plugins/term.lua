@@ -10,10 +10,10 @@ return {
           type_opts = {
             float = {
               --       relative = 'editor',
-              row = 0.2, -- row * 2 + height = 1 to be centered
+              row = 0.1, -- row * 2 + height = 1 to be centered
               col = 0.2, -- col * 2 + width = 1 to be centered
               width = 0.6,
-              height = 0.6,
+              height = 0.8,
               --       border = 'single',
             },
             horizontal = { location = 'rightbelow', split_ratio = 0.35 },
@@ -26,6 +26,8 @@ return {
           --   confirm = true,
           -- },
           -- close_on_exit = true,
+          -- this also make the buffer terminal auto focus
+          -- not cool when we navigate between buffers
           auto_insert = false,
         },
       }
