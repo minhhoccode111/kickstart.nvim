@@ -75,8 +75,7 @@ vim.opt.updatetime = 50 -- 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
--- This force myself to type faster
-vim.opt.timeoutlen = 155
+vim.opt.timeoutlen = 165 -- 250
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true

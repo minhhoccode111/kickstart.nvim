@@ -3,12 +3,12 @@ return { -- Autoformat
   lazy = false,
   keys = {
     {
-      '<leader>b',
+      '<leader>F',
       function()
         require('conform').format { async = true, lsp_fallback = true }
       end,
       mode = '',
-      desc = 'Make Code [B]eautiful',
+      desc = '[F]ormat Code',
     },
   },
   opts = {
@@ -17,6 +17,7 @@ return { -- Autoformat
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
+      -- Manually edit code style CS50
       local disable_filetypes = { c = true, cpp = true }
       return {
         timeout_ms = 500,

@@ -27,9 +27,9 @@ return {
       'json',
 
       -- other
-      -- 'xml',
-      -- 'http',
-      -- 'graphql',
+      'xml',
+      'http',
+      'graphql',
     },
 
     --[[ -- autotag for react
