@@ -39,12 +39,12 @@ return { -- Autoformat
       jsx = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
-      -- markdown = { { 'prettierd', 'prettier' } },
+      markdown = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
-      go = { 'ast_grep' },
+      -- go = { 'ast_grep' },
 
       -- low level
-      -- c = { { 'clang-format' } },
+      c = { 'clang-format' },
     },
   },
 }

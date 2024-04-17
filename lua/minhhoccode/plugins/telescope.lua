@@ -75,33 +75,40 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
+    -- pcall(require('telescope').load_extension, 'rest')
 
     -- See `:help telescope.builtin`
     -- mine
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
-    vim.keymap.set('n', '<leader>ff', builtin.fd, { desc = '[F]ind [F]iles' })
-    vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind Select [T]elescope' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind Current [W]ord' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep String' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-    vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind [O]ld (Opened) Files' })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Current [B]uffers' })
-    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
-    vim.keymap.set('n', '<leader>fa', function() -- use fd for performance search
+    local map = vim.keymap.set
+    map('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
+    map('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
+    map('n', '<leader>ff', builtin.fd, { desc = '[F]ind [F]iles' })
+    map('n', '<leader>ft', builtin.builtin, { desc = '[F]ind Select [T]elescope' })
+    map('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind Current [W]ord' })
+    map('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep String' })
+    map('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
+    map('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind [O]ld (Opened) Files' })
+    map('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Current [B]uffers' })
+    map('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
+    map('n', '<leader>fc', builtin.git_commits, { desc = '[F]ind Git [C]ommits' })
+    map('n', '<leader>fs', builtin.git_status, { desc = '[F]ind Git [S]tatus' })
+    map('n', '<c-p>', builtin.resume, { desc = '[F]ind [R]esume' })
+    map('n', '<leader>fa', function() -- use fd for performance search
       builtin.fd {
         no_ignore = true,
         hidden = true,
         follow = true,
       }
     end, { desc = '[F]ind [A]ll files' })
-    vim.keymap.set('n', '<leader>fc', builtin.git_commits, { desc = '[F]ind Git [C]ommits' })
-    vim.keymap.set('n', '<leader>fs', builtin.git_status, { desc = '[F]ind Git [S]tatus' })
-    vim.keymap.set('n', '<c-p>', builtin.resume, { desc = '[F]ind [R]esume' })
+
+    -- For Nvim.Rest extensions
+    -- map('n', '<leader>fe', function()
+    --   require('telescope').extensions.rest.select_env()
+    -- end, { desc = '[F]ind REST [E]nvironment File' })
 
     -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
+    map('n', '<leader>/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
@@ -111,7 +118,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set('n', '<leader>f/', function()
+    map('n', '<leader>f/', function()
       builtin.live_grep {
         grep_open_files = true,
         prompt_title = 'Live Grep in Open Files',
@@ -119,27 +126,27 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end, { desc = '[F]ind [/] in Open Files' })
 
     -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>fn', function()
+    map('n', '<leader>fn', function()
       builtin.fd { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[F]ind [N]eovim files' })
 
-    -- Shortcut for searching my /learnj dir
-    vim.keymap.set('n', '<leader>fL', function()
+    -- Shortcut for searching my /learn dir
+    map('n', '<leader>fL', function()
       builtin.fd { cwd = '~/learn', hidden = true, no_ignore = true }
     end, { desc = '[F]ind [L]earn dir' })
 
     -- Shortcut for searching my /project dir
-    vim.keymap.set('n', '<leader>fP', function()
+    map('n', '<leader>fP', function()
       builtin.fd { cwd = '~/project', hidden = true, no_ignore = true }
     end, { desc = '[F]ind [P]roject dir' })
 
     -- Shortcut for searching my Obsidian dir
-    vim.keymap.set('n', '<leader>fO', function()
+    map('n', '<leader>fO', function()
       builtin.fd { cwd = '~/Documents/mega-documents/current-obsidian', hidden = true, no_ignore = true }
     end, { desc = '[F]ind [O]bsidian dir' })
 
     -- Custom search when you get prompted to options to search
-    vim.keymap.set('n', '<leader>f?', function()
+    map('n', '<leader>f?', function()
       local cwd_s = vim.fn.input 'Path (~/): '
       local hidden_c = vim.fn.input 'With hidden files? (Y/n) '
       local no_ignore_c = vim.fn.input 'Show files listed in .gitignore (node_modules)? (y/N) '
@@ -175,6 +182,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
         -- show file ignore by .gitignore (who search in /node_modules?)
         no_ignore = no_ignore,
       }
-    end, { desc = 'Prompt to [F]ind from ~/[?]' })
+    end, { desc = 'Prompt [F]ind from ~/[?]' })
   end,
 }

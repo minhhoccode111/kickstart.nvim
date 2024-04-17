@@ -24,10 +24,10 @@ return {
       'typescript',
       'jsdoc',
       'css',
-      'json',
 
       -- other
       'xml',
+      'json',
       'http',
       'graphql',
     },

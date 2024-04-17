@@ -166,7 +166,7 @@ return { -- LSP Configuration & Plugins
 
       eslint = {},
       ast_grep = {},
-      gopls = {},
+      -- gopls = {}, -- linux debian don't have go installed properly
       -- pyright = {},
       -- rust_analyzer = {},
 
