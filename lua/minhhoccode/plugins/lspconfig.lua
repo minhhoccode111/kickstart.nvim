@@ -163,6 +163,7 @@ return { -- LSP Configuration & Plugins
       cssls = {},
       grammarly = {},
       marksman = {},
+      jsonls = {},
 
       eslint = {},
       ast_grep = {},

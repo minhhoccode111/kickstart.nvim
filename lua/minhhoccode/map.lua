@@ -109,6 +109,7 @@ map('n', '<leader>|', '<cmd> vsp <cr>', { desc = 'New [|]Vertical Window' })
 
 -- Extra terminal keymaps in term.lua
 -- Extra markdown keymaps in markdownpreview.lua
+-- Extra rest nvim keymaps in rest.lua
 
 -- Cycle through files in current buffer
 map('n', '<c-o>', '<cmd> bn <cr>', { desc = 'Next Buffer', silent = true })

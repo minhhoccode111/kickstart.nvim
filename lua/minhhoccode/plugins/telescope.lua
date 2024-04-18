@@ -75,7 +75,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    -- pcall(require('telescope').load_extension, 'rest')
+    pcall(require('telescope').load_extension, 'rest')
 
     -- See `:help telescope.builtin`
     -- mine
@@ -101,6 +101,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
         follow = true,
       }
     end, { desc = '[F]ind [A]ll files' })
+    map('n', '<leader>fe', function()
+      require('telescope').extensions.rest.select_env()
+    end, { desc = '[F]ind [E]nv File Rest.nvim' })
 
     -- For Nvim.Rest extensions
     -- map('n', '<leader>fe', function()
