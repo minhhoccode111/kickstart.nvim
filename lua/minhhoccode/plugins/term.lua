@@ -21,10 +21,11 @@ return {
           },
         },
         behavior = {
-          -- autoclose_on_quit = {
-          --   enabled = false,
-          --   confirm = true,
-          -- },
+          autoclose_on_quit = {
+            -- This free a port when terminal close? Myth
+            enabled = true,
+            confirm = false,
+          },
           -- close_on_exit = true,
           -- this also make the buffer terminal auto focus
           -- not cool when we navigate between buffers

@@ -12,11 +12,11 @@ map('i', 'jj', '<esc>', { desc = 'Enter Normal mode from Insert mode' })
 
 -- Visual mode JK to mode selected text
 -- Copy from The Prime Agen, work like magic
--- The 'V' is for Normal mode to enter Visual line automatically
--- It will be even better if we move line in Normal mode
--- so we don't have to press <esc> manually
-map({ 'v', 'n' }, '<a-j>', "V:m '>+1<CR>gv=gv", { desc = 'Hold Alt Move Line' })
-map({ 'v', 'n' }, '<a-k>', "V:m '<-2<CR>gv=gv", { desc = 'Hold Alt Move Line' })
+map('v', '<a-j>', ":m '>+1<CR>gv=gv", { desc = 'Hold Alt Move Line' })
+map('v', '<a-k>', ":m '<-2<CR>gv=gv", { desc = 'Hold Alt Move Line' })
+-- Normal mode auto enter visual and exit after getting things done
+map('n', '<a-j>', "V:m '>+1<CR>gv=gv<esc>", { desc = 'Hold Alt Move Line' })
+map('n', '<a-k>', "V:m '<-2<CR>gv=gv<esc>", { desc = 'Hold Alt Move Line' })
 
 -- Join line below but keep cursor position the same
 map('n', 'J', 'mzJ`z', { desc = 'Join line below and keep cursor position the same' })
