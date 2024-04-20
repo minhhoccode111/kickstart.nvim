@@ -101,8 +101,6 @@ return { -- LSP Configuration & Plugins
         --  For example, in C this would take you to the header.
         map('<leader>lD', vim.lsp.buf.declaration, 'Goto [D]eclaration')
 
-        -- TODO: Understand between lD, lt, ld, ...etc
-
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed

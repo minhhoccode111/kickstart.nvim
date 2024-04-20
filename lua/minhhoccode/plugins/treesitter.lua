@@ -25,7 +25,7 @@ return {
       'jsdoc',
       'css',
 
-      -- other
+      -- other rest.nvim
       'xml',
       'json',
       'http',

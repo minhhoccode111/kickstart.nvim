@@ -1,4 +1,6 @@
-return { -- Autoformat
+-- Autoformat
+
+return {
   'stevearc/conform.nvim',
   lazy = false,
   keys = {
@@ -18,7 +20,13 @@ return { -- Autoformat
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
       -- Manually edit code style CS50
-      local disable_filetypes = { c = true, cpp = true }
+      local disable_filetypes = {
+        c = true,
+        cpp = true,
+        -- No need for markdown
+        markdown = true,
+        -- md = true,
+      }
       return {
         timeout_ms = 500,
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
