@@ -201,7 +201,7 @@ return { -- LSP Configuration & Plugins
       'stylua', -- Used to format Lua code
 
       -- Web dev
-      -- 'markdownlint',
+      'markdownlint',
       'prettier',
       'prettierd',
       'standardjs',
