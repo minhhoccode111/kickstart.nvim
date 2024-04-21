@@ -25,6 +25,7 @@ return {
         cpp = true,
         -- No need for markdown
         markdown = true,
+        -- json = true,
         -- md = true,
       }
       return {
@@ -49,12 +50,12 @@ return {
       typescriptreact = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
-      markdown = { { 'prettierd', 'prettier' } },
+      -- markdown = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
       -- go = { 'ast_grep' },
 
       -- low level
-      c = { 'clang-format' },
+      -- c = { 'clang-format' },
     },
   },
 }
