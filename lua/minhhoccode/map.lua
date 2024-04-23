@@ -79,9 +79,7 @@ map({ 'i', 'n' }, '<C-s>', '<cmd> w <cr>', { desc = 'Save file' })
 map('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]eplace [R]egex String' })
 
 -- Source current file
-map('n', '<leader><leader>', function()
-  vim.cmd 'so'
-end, { desc = 'Source File' })
+map('n', '<leader>S', '<cmd>so<cr>', { desc = '[S]ource File' })
 
 -- Toggle small things -- `!` stand for toggle action
 map('n', '<leader>Tn', '<cmd>set nu!<cr>', { desc = '[T]oggle [N]umber Line' })

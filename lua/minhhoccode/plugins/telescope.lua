@@ -94,21 +94,18 @@ return { -- Fuzzy Finder (files, lsp, etc)
     map('n', '<leader>fc', builtin.git_commits, { desc = '[F]ind Git [C]ommits' })
     map('n', '<leader>fs', builtin.git_status, { desc = '[F]ind Git [S]tatus' })
     map('n', '<c-p>', builtin.resume, { desc = '[F]ind [R]esume' })
-    map('n', '<leader>fa', function() -- use fd for performance search
+    map('n', '<leader>fa', function()
+      -- use fd for performance search
       builtin.fd {
         no_ignore = true,
         hidden = true,
         follow = true,
       }
     end, { desc = '[F]ind [A]ll files' })
+
     map('n', '<leader>fe', function()
       require('telescope').extensions.rest.select_env()
     end, { desc = '[F]ind [E]nv File Rest.nvim' })
-
-    -- For Nvim.Rest extensions
-    -- map('n', '<leader>fe', function()
-    --   require('telescope').extensions.rest.select_env()
-    -- end, { desc = '[F]ind REST [E]nvironment File' })
 
     -- Slightly advanced example of overriding default behavior and theme
     map('n', '<leader>/', function()
@@ -134,19 +131,19 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end, { desc = '[F]ind [N]eovim files' })
 
     -- Shortcut for searching my /learn dir
-    map('n', '<leader>fL', function()
-      builtin.fd { cwd = '~/learn', hidden = true, no_ignore = true }
-    end, { desc = '[F]ind [L]earn dir' })
+    -- map('n', '<leader>fL', function()
+    --   builtin.fd { cwd = '~/learn', hidden = true, no_ignore = true }
+    -- end, { desc = '[F]ind [L]earn dir' })
 
     -- Shortcut for searching my /project dir
-    map('n', '<leader>fP', function()
-      builtin.fd { cwd = '~/project', hidden = true, no_ignore = true }
-    end, { desc = '[F]ind [P]roject dir' })
+    -- map('n', '<leader>fP', function()
+    --   builtin.fd { cwd = '~/project', hidden = true, no_ignore = true }
+    -- end, { desc = '[F]ind [P]roject dir' })
 
     -- Shortcut for searching my Obsidian dir
-    map('n', '<leader>fO', function()
-      builtin.fd { cwd = '~/Documents/mega-documents/current-obsidian', hidden = true, no_ignore = true }
-    end, { desc = '[F]ind [O]bsidian dir' })
+    -- map('n', '<leader>fO', function()
+    --   builtin.fd { cwd = '~/Documents/mega-documents/current-obsidian', hidden = true, no_ignore = true }
+    -- end, { desc = '[F]ind [O]bsidian dir' })
 
     -- Custom search when you get prompted to options to search
     map('n', '<leader>f?', function()
