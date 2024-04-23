@@ -129,6 +129,8 @@ map('n', '<leader>xo', '<cmd> BufferLineCloseOthers <cr>', { desc = '[X]Close [O
 -- Diagnostic keymaps
 map('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'Go to [D]iagnostic [P]revious message' })
 map('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Go to [D]iagnostic [N]ext message' })
+map('n', '<leader>dk', vim.diagnostic.goto_prev, { desc = 'Go to [D]iagnostic [K]Previous message' })
+map('n', '<leader>dj', vim.diagnostic.goto_next, { desc = 'Go to [D]iagnostic [J]Next message' })
 map('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show [D]iagnostic [E]rror messages' })
 map('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
 
