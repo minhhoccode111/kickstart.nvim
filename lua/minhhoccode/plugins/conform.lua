@@ -45,8 +45,8 @@ return {
       -- web
       javascript = { { 'prettierd', 'prettier', 'standardjs' } },
       typescript = { { 'prettierd', 'prettier' } },
-      jsx = { { 'prettierd', 'prettier', 'standardjs' } },
-      tsx = { { 'prettierd', 'prettier', 'standardjs' } },
+      -- jsx = { { 'prettierd', 'prettier', 'standardjs' } },
+      -- tsx = { { 'prettierd', 'prettier', 'standardjs' } },
       typescriptreact = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
