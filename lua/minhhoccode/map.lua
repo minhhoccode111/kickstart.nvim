@@ -28,6 +28,10 @@ map('n', '<c-d>', '<c-d>zz', { desc = 'Center cursor after moving screen' })
 map('n', '<c-u>', '<c-u>zz', { desc = 'Center cursor after moving screen' })
 map('n', 'n', 'nzzzv', { desc = 'Center cursor after moving screen' })
 map('n', 'N', 'Nzzzv', { desc = 'Center cursor after moving screen' })
+map('n', '}', '}zz', { desc = 'Center cursor after moving screen' })
+map('n', '{', '{zz', { desc = 'Center cursor after moving screen' })
+map('n', '(', '(zz', { desc = 'Center cursor after moving screen' })
+map('n', ')', ')zz', { desc = 'Center cursor after moving screen' })
 
 -- Basic movement and jumping
 map({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
@@ -82,10 +86,10 @@ map('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
 map('n', '<leader>S', '<cmd>so<cr>', { desc = '[S]ource File' })
 
 -- Toggle small things -- `!` stand for toggle action
-map('n', '<leader>Tn', '<cmd>set nu!<cr>', { desc = '[T]oggle [N]umber Line' })
-map('n', '<leader>Tr', '<cmd>set rnu!<cr>', { desc = '[T]oggle [R]elative Number Line' })
-map('n', '<leader>Tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap Line' })
-map('n', '<leader>TD', function()
+map('n', '<leader>tn', '<cmd>set nu!<cr>', { desc = '[T]oggle [N]umber Line' })
+map('n', '<leader>tr', '<cmd>set rnu!<cr>', { desc = '[T]oggle [R]elative Number Line' })
+map('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap Line' })
+map('n', '<leader>td', function()
   if vim.diagnostic.is_disabled() then
     vim.diagnostic.enable()
   else

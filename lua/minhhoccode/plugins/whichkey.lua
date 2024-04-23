@@ -29,8 +29,7 @@ return { -- Useful plugin to show you pending keybinds.
       ['<leader>m'] = { name = '[M]anagers', _ = 'which_key_ignore' },
       ['<leader>n'] = { name = '[N]eotree', _ = 'which_key_ignore' },
       ['<leader>r'] = { name = '[R]eplace', _ = 'which_key_ignore' },
-      ['<leader>t'] = { name = '[T]erminal', _ = 'which_key_ignore' },
-      ['<leader>T'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+      ['<leader>t'] = { name = '[T]erminal | [T]oggle', _ = 'which_key_ignore' },
       ['<leader>x'] = { name = '[X]Close', _ = 'which_key_ignore' },
 
       ['<leader>ls'] = { name = '[L]SP [S]ymbols', _ = 'which_key_ignore' },
