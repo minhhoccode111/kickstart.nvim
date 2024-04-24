@@ -37,7 +37,7 @@ map('n', ')', ')zz', { desc = 'Center cursor after moving screen' })
 map({ 'n', 'o', 'v' }, 'H', '^', { desc = 'Jump to start of line' })
 map({ 'n', 'o', 'v' }, 'L', '$', { desc = 'Jump to end of line' })
 -- no Visual since it is used to move line up and down
-map({ 'n', 'o' }, 'K', '%', { desc = 'Jump between braces' })
+map({ 'n', 'o', 'v' }, 'K', '%', { desc = 'Jump between braces' })
 
 -- Insert new line above and stay in Normal mode
 map('n', 'O', 'o<esc>', { desc = 'New line above' })
