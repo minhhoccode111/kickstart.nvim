@@ -24,6 +24,7 @@ return {
   require 'minhhoccode.plugins.nvimcmp',
   require 'minhhoccode.plugins.other',
   require 'minhhoccode.plugins.rest',
+  require 'minhhoccode.plugins.tailwind',
   require 'minhhoccode.plugins.telescope',
   require 'minhhoccode.plugins.term',
   require 'minhhoccode.plugins.tokyonight',
