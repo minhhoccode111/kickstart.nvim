@@ -1,5 +1,5 @@
 local map = vim.keymap.set
--- local nomap = vim.keymap.del
+local nomap = vim.keymap.del
 
 --[[ KEYS ]]
 
@@ -96,6 +96,20 @@ map('n', '<leader>td', function()
     vim.diagnostic.disable()
   end
 end, { desc = '[T]oggle [D]iagnostic Warning' })
+
+-- toggle gj, gk movement
+local isMovementEnabled = false
+map('n', '<leader>tm', function()
+  if isMovementEnabled then
+    isMovementEnabled = false
+    nomap({ 'n', 'v' }, 'j', { desc = 'Disable keymap for j' })
+    nomap({ 'n', 'v' }, 'k', { desc = 'Disable keymap for k' })
+  else
+    isMovementEnabled = true
+    map({ 'n', 'v' }, 'j', 'gj', { desc = 'Enable keymap for j' })
+    map({ 'n', 'v' }, 'k', 'gk', { desc = 'Enable keymap for k' })
+  end
+end, { desc = '[T]oggle [M]ovement gj, gk' })
 
 -- Close window
 map('n', '<leader>xx', '<cmd> q <cr>', { desc = '[X]Close w/ :q' })
