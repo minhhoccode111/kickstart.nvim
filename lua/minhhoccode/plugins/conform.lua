@@ -20,13 +20,14 @@ return {
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
       -- Manually edit code style CS50
+      -- but we still be able to manually <leader>F to format
       local disable_filetypes = {
         c = true,
         cpp = true,
-        -- No need for markdown
+        --
         markdown = true,
-        -- json = true,
-        -- md = true,
+        json = true,
+        md = true,
       }
       return {
         timeout_ms = 500,
@@ -50,12 +51,12 @@ return {
       typescriptreact = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
-      -- markdown = { { 'prettierd', 'prettier' } },
+      markdown = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
       -- go = { 'ast_grep' },
 
       -- low level
-      -- c = { 'clang-format' },
+      c = { 'clang-format' },
     },
   },
 }
