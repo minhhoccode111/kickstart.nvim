@@ -56,7 +56,7 @@ return {
       -- go = { 'ast_grep' },
 
       -- low level
-      c = { 'clang-format' },
+      c = { { 'ast_grep', 'clang-format' } },
     },
   },
 }
