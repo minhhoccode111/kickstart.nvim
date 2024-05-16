@@ -28,7 +28,7 @@ vim.opt.mousemoveevent = true
 
 -- mine
 -- fat cursor
--- vim.opt.guicursor = ''
+vim.opt.guicursor = ''
 
 -- line wrap, combine with relative number to jump faster
 vim.opt.wrap = false
@@ -75,7 +75,7 @@ vim.opt.updatetime = 50 -- 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 180 -- 250
+vim.opt.timeoutlen = 165 -- 250
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
