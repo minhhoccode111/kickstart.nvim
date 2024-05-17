@@ -25,16 +25,16 @@ return {
         c = true,
         cpp = true,
         --
-        markdown = true,
+        -- markdown = true,
         json = true,
-        md = true,
+        -- md = true,
       }
       return {
         timeout_ms = 500,
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
-    formatters_by_ft = { -- <leader>b to add like ';' to js, ts
+    formatters_by_ft = { -- <leader>F to add like ';' to js, ts
       lua = { 'stylua' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
@@ -51,12 +51,12 @@ return {
       typescriptreact = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
-      markdown = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
+      markdown = { { 'prettierd', 'prettier' } },
       -- go = { 'ast_grep' },
 
       -- low level
-      c = { { 'ast_grep', 'clang-format' } },
+      c = { { 'clang-format', 'ast_grep' } },
     },
   },
 }

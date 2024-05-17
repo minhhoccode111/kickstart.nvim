@@ -90,11 +90,8 @@ map('n', '<leader>tn', '<cmd>set nu!<cr>', { desc = '[T]oggle [N]umber Line' })
 map('n', '<leader>tr', '<cmd>set rnu!<cr>', { desc = '[T]oggle [R]elative Number Line' })
 map('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap Line' })
 map('n', '<leader>td', function()
-  if vim.diagnostic.is_disabled() then
-    vim.diagnostic.enable()
-  else
-    vim.diagnostic.disable()
-  end
+  -- to toggle
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = '[T]oggle [D]iagnostic Warning' })
 
 -- toggle gj, gk movement

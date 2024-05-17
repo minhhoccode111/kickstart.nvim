@@ -28,7 +28,7 @@ vim.opt.mousemoveevent = true
 
 -- mine
 -- fat cursor
-vim.opt.guicursor = ''
+-- vim.opt.guicursor = ''
 
 -- line wrap, combine with relative number to jump faster
 vim.opt.wrap = false

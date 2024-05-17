@@ -15,7 +15,7 @@ return { -- LSP Configuration & Plugins
     { 'folke/neodev.nvim', opts = {} },
 
     -- for js, ts
-    { 'MunifTanjim/prettier.nvim', opts = {} },
+    -- { 'MunifTanjim/prettier.nvim', opts = {} },
   },
   config = function()
     -- Brief aside: **What is LSP?**
@@ -159,7 +159,7 @@ return { -- LSP Configuration & Plugins
       emmet_ls = {},
       html = {},
       cssls = {},
-      grammarly = {},
+      -- grammarly = {},
       marksman = {},
       jsonls = {},
 
