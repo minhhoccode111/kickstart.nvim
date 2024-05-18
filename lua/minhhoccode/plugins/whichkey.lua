@@ -23,7 +23,8 @@ return { -- Useful plugin to show you pending keybinds.
     require('which-key').register {
       ['<leader>a'] = { name = '[A]PIs', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-      ['<leader>d'] = { name = '[D]ebug | [D]iagnostic', _ = 'which_key_ignore' },
+      ['<leader>d'] = { name = '[D]iagnostic', _ = 'which_key_ignore' },
+      ['<leader>D'] = { name = '[D]ebug', _ = 'which_key_ignore' },
       ['<leader>h'] = { name = 'Gitsign [H]unk', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
       ['<leader>m'] = { name = '[M]anagers', _ = 'which_key_ignore' },
