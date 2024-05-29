@@ -173,21 +173,18 @@ return { -- LSP Configuration & Plugins
       --
       -- because we setup with this approach, we don't also manually set up servers directly via lspconfig as this will cause servers to setup more than once
       -- require('lspconfig')[server_name].setup(server)
-      clangd = {},
-      tsserver = {},
-      tailwindcss = {},
-      emmet_language_server = {},
-      emmet_ls = {},
-      html = {},
-      cssls = {},
-      marksman = {},
-      jsonls = {},
-
-      eslint = {},
-      ast_grep = {},
       -- gopls = {}, -- linux debian don't have go installed properly
       -- pyright = {},
       -- rust_analyzer = {},
+
+      ast_grep = {},
+      clangd = {},
+      cssls = {},
+      emmet_language_server = {},
+      eslint = {},
+      html = {},
+      tailwindcss = {},
+      tsserver = {},
 
       lua_ls = {
         -- cmd = {...},
