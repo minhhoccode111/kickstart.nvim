@@ -48,6 +48,7 @@ return {
       typescript = { { 'prettierd', 'prettier' } },
       -- jsx = { { 'prettierd', 'prettier', 'standardjs' } },
       -- tsx = { { 'prettierd', 'prettier', 'standardjs' } },
+      javascriptreact = { { 'prettierd', 'prettier', 'standardjs' } },
       typescriptreact = { { 'prettierd', 'prettier', 'standardjs' } },
       html = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
