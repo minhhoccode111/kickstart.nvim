@@ -174,7 +174,7 @@ return { -- LSP Configuration & Plugins
       -- because we setup with this approach, we don't also manually set up servers directly via lspconfig as this will cause servers to setup more than once
       -- require('lspconfig')[server_name].setup(server)
       -- gopls = {}, -- linux debian don't have go installed properly
-      -- pyright = {},
+      pyright = {},
       -- rust_analyzer = {},
 
       ast_grep = {},

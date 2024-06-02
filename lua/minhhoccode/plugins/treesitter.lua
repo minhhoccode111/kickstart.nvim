@@ -45,9 +45,9 @@ return {
       enable = true,
       -- list of language that will be disabled
       disable = {
-        -- 'c',
+        'c',
         -- 'rust',
-        -- 'markdown',
+        'markdown',
       },
       -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
       --  If you are experiencing weird indenting issues, add the language to

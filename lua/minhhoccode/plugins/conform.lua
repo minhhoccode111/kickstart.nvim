@@ -23,10 +23,10 @@ return {
       -- but we still be able to manually <leader>F to format
       local disable_filetypes = {
         c = true,
-        cpp = true,
+        -- cpp = true,
         --
         -- markdown = true,
-        json = true,
+        -- json = true,
         -- md = true,
       }
       return {
@@ -37,12 +37,12 @@ return {
     formatters_by_ft = { -- <leader>F to add like ';' to js, ts
       lua = { 'stylua' },
       -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
       -- javascript = { { "prettierd", "prettier" } },
 
+      python = { { 'isort', 'black' } },
       -- web
       javascript = { { 'prettierd', 'prettier', 'standardjs' } },
       typescript = { { 'prettierd', 'prettier' } },
