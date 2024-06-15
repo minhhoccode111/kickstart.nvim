@@ -126,24 +126,29 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end, { desc = '[F]ind [/] in Open Files' })
 
     -- Shortcut for searching your Neovim configuration files
-    map('n', '<leader>fn', function()
+    map('n', '<leader>fN', function()
       builtin.fd { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[F]ind [N]eovim files' })
 
     -- Shortcut for searching my /learn dir
-    -- map('n', '<leader>fL', function()
-    --   builtin.fd { cwd = '~/learn', hidden = true, no_ignore = true }
-    -- end, { desc = '[F]ind [L]earn dir' })
+    map('n', '<leader>fL', function()
+      builtin.fd { cwd = '~/learn', hidden = true, no_ignore = true }
+    end, { desc = '[F]ind [L]earn dir' })
 
     -- Shortcut for searching my /project dir
-    -- map('n', '<leader>fP', function()
-    --   builtin.fd { cwd = '~/project', hidden = true, no_ignore = true }
-    -- end, { desc = '[F]ind [P]roject dir' })
+    map('n', '<leader>fP', function()
+      builtin.fd { cwd = '~/project', hidden = true, no_ignore = true }
+    end, { desc = '[F]ind [P]roject dir' })
 
-    -- Shortcut for searching my Obsidian dir
-    -- map('n', '<leader>fO', function()
-    --   builtin.fd { cwd = '~/Documents/mega-documents/current-obsidian', hidden = true, no_ignore = true }
-    -- end, { desc = '[F]ind [O]bsidian dir' })
+    -- Shortcut for searching my /project/fakebook-messing dir
+    map('n', '<leader>fF', function()
+      builtin.fd { cwd = '~/project/fakebook-messing/', hidden = true, no_ignore = true }
+    end, { desc = '[F]ind [F]akebook-messing dir' })
+
+    -- Shortcut for searching my /Documents dir
+    map('n', '<leader>fD', function()
+      builtin.fd { cwd = '~/Documents', hidden = true, no_ignore = true }
+    end, { desc = '[F]ind [D]ocuments dir' })
 
     -- Custom search when you get prompted to options to search
     map('n', '<leader>f?', function()
