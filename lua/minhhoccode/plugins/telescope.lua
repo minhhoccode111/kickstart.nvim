@@ -137,7 +137,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- Shortcut for searching my /web dir
     map('n', '<leader>fW', function()
-      builtin.fd { cwd = '~/web', hidden = true, no_ignore = true }
+      builtin.fd { cwd = '~/web', hidden = true, no_ignore = false } -- so many node_modules
     end, { desc = '[F]ind [w]eb dir' })
 
     -- Shortcut for searching my /learn dir
@@ -147,7 +147,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- Shortcut for searching my /project dir
     map('n', '<leader>fP', function()
-      builtin.fd { cwd = '~/project', hidden = true, no_ignore = true }
+      builtin.fd { cwd = '~/project', hidden = true, no_ignore = false } -- so many node_modules
     end, { desc = '[F]ind [p]roject dir' })
 
     -- Shortcut for searching my /Documents dir

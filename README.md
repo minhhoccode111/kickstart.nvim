@@ -1,5 +1,9 @@
 # kickstart.nvim
 
+## Important
+
+- Some Telescope search dir config is based on my machine file structure
+
 ## Introduction
 
 A starting point for Neovim that is:
