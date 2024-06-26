@@ -117,7 +117,7 @@ map('n', '<c-,>', '<c-w><', { desc = 'Decrease Window Width' })
 map('n', '<c-.>', '<c-w>>', { desc = 'Increase Window Width' })
 
 -- Split window
-map('n', '<leader>-', '<cmd> sp <cr>', { desc = 'New [-]Horizon Window' })
+map('n', '<leader>_', '<cmd> sp <cr>', { desc = 'New [_]Horizon Window' })
 map('n', '<leader>|', '<cmd> vsp <cr>', { desc = 'New [|]Vertical Window' })
 
 -- Extra terminal keymaps in term.lua
